@@ -76,7 +76,9 @@ TBD
   a therapy-like atmosphere. Inspirations: Notion, Airbnb, Apple.
 
 ## Pages / sitemap
-TBD (concept 01 uses: Home with Method, Journey, Partnerships, Fit check, Work, Studio, Start)
+Draft (search-first): Home (search) · Partnerships (Brand Foundation, Creative, Strategic, Enterprise) ·
+Method (5P Workshop, Customer Journey) · Work (index + case studies) · Studio (Eli, team) · Book an intro ·
+No-results state. Search answers common questions straight from the FAQs.
 
 ## Technical
 - Hosting / domain: itseli.com
@@ -91,7 +93,11 @@ TBD (concept 01 uses: Home with Method, Journey, Partnerships, Fit check, Work, 
 - Hero options canvas: https://claude.ai/artifact/Aw3oW7i1dBmyunUbUyxxDL. Six heroes in the itseli OS
   look: A Blank Page, B Spotlight (search), C Today (day view), D Your Portal (empty client portal),
   E One Task, F Unclear to Clear (board). Plus boards with 6 options each for buttons, navigation,
-  inputs and cards. Waiting on Eli's picks.
+  inputs and cards.
+- Same canvas, page "B · Spotlight": the chosen direction explored. Homepage takes B1 Search + preview,
+  B2 Ask and get an answer (FAQ answers), B3 Nothing but the field, B4 Phone. Pages reached from search:
+  Brand Foundation, The 5P Workshop, Harmless case study, Eli and the studio, All work, Book an intro
+  dialog, No results state. The boards link to each other (Play to click through).
 
 ## Open questions
 - Switch voice from "I" to "we" across the site? (Concept 01 uses "we", with a first-person founder section.)
@@ -106,5 +112,7 @@ TBD (concept 01 uses: Home with Method, Journey, Partnerships, Fit check, Work, 
   (repo itseli-studio/itseli-os; see its docs/STYLE_GUIDE.md): monochrome black/white/greys, Inter,
   the black "it" tile mark, 1px lines, 1.5px icons, radii 8/10/12/16, color only for status meaning.
   Light theme only.
+- 2026-11-03: Eli picked hero B (Spotlight): a search-first site where ⌘K search is the navigation.
+  Explore that direction across the other pages.
 - 2026-11-03: Redesign from scratch. Direction: the site should look and behave like a SaaS product
   (Notion / Airbnb / Apple influence), minimal, high-end, calm.
