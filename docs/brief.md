@@ -87,7 +87,11 @@ TBD (concept 01 uses: Home with Method, Journey, Partnerships, Fit check, Work, 
 - `docs/concepts/01-clarity-os.html`: "Clarity OS". The studio presented as a product: live 5P
   workspace as the hero, a breathing pause, process tabs, interactive customer journey, partnership
   "plans", a fit check, work library, founder note, intro form, ⌘K command palette.
-  Artifact: https://claude.ai/artifact/XcbWKuxEPn7cJeCPTabMFg
+  Artifact: https://claude.ai/artifact/XcbWKuxEPn7cJeCPTabMFg. **Rejected** (too dark and cinematic).
+- Hero options canvas: https://claude.ai/artifact/Aw3oW7i1dBmyunUbUyxxDL. Six heroes in the itseli OS
+  look: A Blank Page, B Spotlight (search), C Today (day view), D Your Portal (empty client portal),
+  E One Task, F Unclear to Clear (board). Plus boards with 6 options each for buttons, navigation,
+  inputs and cards. Waiting on Eli's picks.
 
 ## Open questions
 - Switch voice from "I" to "we" across the site? (Concept 01 uses "we", with a first-person founder section.)
@@ -96,5 +100,11 @@ TBD (concept 01 uses: Home with Method, Journey, Partnerships, Fit check, Work, 
 - Real photography of Eli and the studio?
 
 ## Decisions
+- 2026-11-03: Concept 01 (Clarity OS) rejected: too dark and cinematic. Go back to emptiness and
+  eeriness. Show options for the hero and UI elements only, not full pages.
+- 2026-11-03: Take UI inspiration from Eli's own itseli OS app and its client portal
+  (repo itseli-studio/itseli-os; see its docs/STYLE_GUIDE.md): monochrome black/white/greys, Inter,
+  the black "it" tile mark, 1px lines, 1.5px icons, radii 8/10/12/16, color only for status meaning.
+  Light theme only.
 - 2026-11-03: Redesign from scratch. Direction: the site should look and behave like a SaaS product
   (Notion / Airbnb / Apple influence), minimal, high-end, calm.
