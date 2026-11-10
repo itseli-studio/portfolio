@@ -106,6 +106,10 @@ No-results state. Search answers common questions straight from the FAQs.
   B2 Ask and get an answer (FAQ answers), B3 Nothing but the field, B4 Phone. Pages reached from search:
   Brand Foundation, The 5P Workshop, Harmless case study, Eli and the studio, All work, Book an intro
   dialog, No results state. The boards link to each other (Play to click through).
+- Same canvas, page "Round 3 · The door" (2026-11-10): option 1 (headline, then the bar is the
+  only way in) as 1A Plain speech, 1A after entering, 1A phone, 1B The menu, 1C Quiet; and fresh
+  concepts F1 The ticket, F2 One sentence, F3 The questions are the door. Copy follows the studio
+  doc, with a draft pitch (no "tired" framing) and "starting at" prices.
 
 ## Open questions
 - 2026-11-10: How does the search-bar entry fit with the studio doc's locked homepage and locked
