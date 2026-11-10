@@ -72,6 +72,16 @@ TBD
 - Sarah: studio operations / PCM.
 - Designer(s).
 
+## Photography (2026-11-10, Eli)
+- Close-ups of studio life: notepads, sticky notes, napkin doodles, coffee, plants, and lots of
+  stress balls.
+- Every image has rounded corners and takes up a big part of the screen at all times.
+- Real photos taken in the studio, not stock and not AI-generated (fits the studio doc's honesty
+  and "real photography" direction). The canvas uses labeled stand-ins until they exist.
+- Shot list so far: a pile of stress balls on the studio desk; sticky notes on the wall from a real
+  message session; a napkin doodle on a cafe table with a pen; coffee from above with a sticky note;
+  a studio plant with a stray stress ball; a ruled notepad with handwritten notes and a pencil.
+
 ## Brand
 - Logo: TBD (need files)
 - Colors: TBD
@@ -110,6 +120,10 @@ No-results state. Search answers common questions straight from the FAQs.
   only way in) as 1A Plain speech, 1A after entering, 1A phone, 1B The menu, 1C Quiet; and fresh
   concepts F1 The ticket, F2 One sentence, F3 The questions are the door. Copy follows the studio
   doc, with a draft pitch (no "tired" framing) and "starting at" prices.
+- Same canvas, page "Round 4 · The questions" (2026-11-10): Fresh 3 developed. V1 split (questions
+  left, image right), V2 image band with the answer on it, V3 a sheet of paper on the desk, a phone
+  version, and the What we do page in the same question style. Each image changes with the open
+  question. Images are labeled stand-in sketches until real photos exist.
 
 ## Open questions
 - 2026-11-10: How does the search-bar entry fit with the studio doc's locked homepage and locked
@@ -150,3 +164,5 @@ No-results state. Search answers common questions straight from the FAQs.
   - Show prices as ballpark "starting at" figures, not exact terms.
   - Keep the name itseli.
   - Explore option 1 (the search bar as the door, directly under the hero lines) plus fresh concepts.
+- 2026-11-10: Eli picked Fresh 3, "the questions are the door": a glorified FAQ page as the homepage.
+  Answers should be polished and sound like Eli speaks. Add big, rounded, close-up studio photos.
