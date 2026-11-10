@@ -32,6 +32,9 @@ Google Drive (owner: Eli):
 - Contact: TBD
 
 ## Services (current offer structure)
+> **Changing (2026-11-10):** Eli is rewriting Brand Foundation and the offer. A new studio doc
+> (studio outline, process, philosophy) will replace this section. Don't build on the list below.
+
 1. **Brand Foundation**: one-month fixed engagement. Discovery, stakeholder conversations, market
    observations, messaging exploration, recommendations, roadmap. The entry point.
 2. **Creative Partnership**: ongoing execution (advertising, packaging, marketing materials, campaigns,
@@ -108,7 +111,7 @@ No-results state. Search answers common questions straight from the FAQs.
 ## Decisions
 - 2026-11-03: Concept 01 (Clarity OS) rejected: too dark and cinematic. Go back to emptiness and
   eeriness. Show options for the hero and UI elements only, not full pages.
-- 2026-11-03: Take UI inspiration from Eli's own itseli OS app and its client portal
+- 2026-11-03 (**reversed 2026-11-10**): Take UI inspiration from Eli's own itseli OS app and its client portal
   (repo itseli-studio/itseli-os; see its docs/STYLE_GUIDE.md): monochrome black/white/greys, Inter,
   the black "it" tile mark, 1px lines, 1.5px icons, radii 8/10/12/16, color only for status meaning.
   Light theme only.
@@ -116,3 +119,11 @@ No-results state. Search answers common questions straight from the FAQs.
   Explore that direction across the other pages.
 - 2026-11-03: Redesign from scratch. Direction: the site should look and behave like a SaaS product
   (Notion / Airbnb / Apple influence), minimal, high-end, calm.
+- 2026-11-10: Dropped the itseli OS look. Take no inspiration from Eli's other Claude projects
+  (itseli OS, client portal, finances, Tribal prototype). The Spotlight boards' styling came from
+  itseli OS, so only the search-first idea carries forward, not their look.
+- 2026-11-10: Brief for the design: think like an elite brand developer who specializes in clear,
+  honest communication. A VIP experience: modern, easy to navigate, and quick to get people to the
+  answers most of them want.
+- 2026-11-10: Brand Foundation and the offer are changing. Eli will share a detailed studio doc
+  (outline, process, philosophy) to build on; it becomes the source of truth for content.

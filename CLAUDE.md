@@ -24,6 +24,10 @@ Design specs from brainstorming go in `docs/superpowers/specs/`, plans in `docs/
   decisions. Update it whenever new details or decisions come up, and commit it.
 
 ## Working rules
+- Take no design inspiration from Eli's other Claude projects (itseli OS, its client portal,
+  itseli finances, Tribal website prototype). Design this site on its own terms.
+- Studio content (offer, process, philosophy) comes from Eli's new studio doc once shared;
+  older Drive docs about Brand Foundation and the offer are out of date.
 - Commit and push after every meaningful change so the next session picks it up.
 - Record decisions in `docs/brief.md` (under "Decisions") rather than only in chat.
 - Connected tools that may hold source material: Figma, Google Drive, ClickUp.
