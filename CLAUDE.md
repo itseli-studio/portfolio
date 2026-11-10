@@ -5,8 +5,19 @@ Work happens across multiple Claude Code cloud sessions and devices, so this rep
 single source of truth. Anything not committed and pushed is lost when a session ends.
 
 ## Status
-- Phase: **discovery** — gathering details from the existing website. Nothing has been built yet.
+- Phase: **design exploration**. Eli picked the search-first "Spotlight" direction (hero B).
+  Explorations live on the design canvas linked in `docs/brief.md`. Nothing has been built yet.
 - Do not start building the site until the owner says so.
+
+## Skills to use (Eli's instruction, 2026-11-10)
+For all work on this project, use these skills:
+- **Superpowers**: start with `superpowers:brainstorming` before any creative or build work, then
+  `superpowers:writing-plans` and the rest of the Superpowers workflow (TDD, verification before
+  claiming done, code review).
+- **frontend-design** (`frontend-design:frontend-design`) for visual direction and UI building.
+- **ui-ux-pro-max** (`anthropic-skills:ui-ux-pro-max`) for UX, accessibility, layout, type and color checks.
+
+Design specs from brainstorming go in `docs/superpowers/specs/`, plans in `docs/superpowers/plans/`.
 
 ## Where things live
 - `docs/brief.md` — the project brief: company info, services, projects, brand, content, and
