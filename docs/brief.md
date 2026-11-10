@@ -1,5 +1,10 @@
 # Portfolio website — brief
 
+> **Source of truth:** Eli's Google Doc titled "Studio Website Brief" (in his Drive; link kept out
+> of this public repo). It covers positioning, audience, voice, offer, site structure, copy and
+> visual direction. This file keeps history, decisions and open questions. Where they disagree,
+> the doc wins.
+
 _Living document. Filled in during discovery; updated as decisions are made._
 
 ## Sources used so far
@@ -103,6 +108,10 @@ No-results state. Search answers common questions straight from the FAQs.
   dialog, No results state. The boards link to each other (Play to click through).
 
 ## Open questions
+- 2026-11-10: How does the search-bar entry fit with the studio doc's locked homepage and locked
+  nav? The doc also rules out an "ask our AI" feature, so the bar has to stay plain site search.
+- Studio name: the doc says the studio is outgrowing "Itseli". Use a swappable [Studio]
+  placeholder until Eli gives a name.
 - Switch voice from "I" to "we" across the site? (Concept 01 uses "we", with a first-person founder section.)
 - Show prices or keep "Complexity + Scope + Impact"?
 - Which 4–6 projects become full case studies first?
@@ -130,3 +139,5 @@ No-results state. Search answers common questions straight from the FAQs.
 - 2026-11-10: What carries forward from Spotlight: every visitor starts by going through one entry
   point, the search bar. The bar works as a portal or threshold, the way into the site. Not its
   look, and not the other Spotlight board layouts.
+- 2026-11-10: Eli's "Studio Website Brief" doc is the source of truth. It replaces the earlier
+  "therapy-like" wish (the doc rules out therapy and wellness language).

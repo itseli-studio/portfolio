@@ -26,8 +26,13 @@ Design specs from brainstorming go in `docs/superpowers/specs/`, plans in `docs/
 ## Working rules
 - Take no design inspiration from Eli's other Claude projects (itseli OS, its client portal,
   itseli finances, Tribal website prototype). Design this site on its own terms.
-- Studio content (offer, process, philosophy) comes from Eli's new studio doc once shared;
-  older Drive docs about Brand Foundation and the offer are out of date.
+- **Source of truth for strategy, voice, structure and copy: Eli's Google Doc titled "Studio
+  Website Brief"** (find it by searching Eli's Google Drive for that title; the link is kept out of
+  this public repo on purpose). Eli keeps editing it. Re-read it at the start of every session and
+  before writing a spec, a plan or any site copy. Where it and `docs/brief.md` disagree, the doc
+  wins. Older Drive docs about Brand Foundation and the old offer are out of date.
+- This repo is public. Don't commit private links, client documents or internal notes.
+- Never use em dashes in site copy (the studio brief asks for commas, periods or a simple hyphen).
 - Commit and push after every meaningful change so the next session picks it up.
 - Record decisions in `docs/brief.md` (under "Decisions") rather than only in chat.
 - Connected tools that may hold source material: Figma, Google Drive, ClickUp.
