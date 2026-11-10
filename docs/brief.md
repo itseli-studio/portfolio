@@ -110,8 +110,6 @@ No-results state. Search answers common questions straight from the FAQs.
 ## Open questions
 - 2026-11-10: How does the search-bar entry fit with the studio doc's locked homepage and locked
   nav? The doc also rules out an "ask our AI" feature, so the bar has to stay plain site search.
-- Studio name: the doc says the studio is outgrowing "Itseli". Use a swappable [Studio]
-  placeholder until Eli gives a name.
 - Switch voice from "I" to "we" across the site? (Concept 01 uses "we", with a first-person founder section.)
 - Show prices or keep "Complexity + Scope + Impact"?
 - Which 4–6 projects become full case studies first?
@@ -141,3 +139,10 @@ No-results state. Search answers common questions straight from the FAQs.
   look, and not the other Spotlight board layouts.
 - 2026-11-10: Eli's "Studio Website Brief" doc is the source of truth. It replaces the earlier
   "therapy-like" wish (the doc rules out therapy and wellness language).
+- 2026-11-10 (Eli, overrides the studio doc where they differ):
+  - Don't frame the service as relief from a burden ("tired of keeping your message straight",
+    "take it off your plate"). Frame it as a service the client wouldn't otherwise get. The doc's
+    locked pitch needs a new version; Claude drafts options, Eli picks or edits.
+  - Show prices as ballpark "starting at" figures, not exact terms.
+  - Keep the name itseli.
+  - Explore option 1 (the search bar as the door, directly under the hero lines) plus fresh concepts.
