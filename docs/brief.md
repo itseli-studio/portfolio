@@ -120,6 +120,11 @@ No-results state. Search answers common questions straight from the FAQs.
   only way in) as 1A Plain speech, 1A after entering, 1A phone, 1B The menu, 1C Quiet; and fresh
   concepts F1 The ticket, F2 One sentence, F3 The questions are the door. Copy follows the studio
   doc, with a draft pitch (no "tired" framing) and "starting at" prices.
+- `docs/concepts/02-the-tour.html` (2026-11-10): "The tour", a scroll-paced homepage prototype.
+  One small idea per screen, then a big rounded photo to breathe on, then the next. Text turns from
+  grey to ink as you reach it, photos settle in as they arrive, the months step through as you
+  scroll, and the questions are six stops on the tour. Artifact:
+  https://claude.ai/artifact/SGekADyCf3SYqL1We9reJB
 - Same canvas, page "Round 4 · The questions" (2026-11-10): Fresh 3 developed. V1 split (questions
   left, image right), V2 image band with the answer on it, V3 a sheet of paper on the desk, a phone
   version, and the What we do page in the same question style. Each image changes with the open
@@ -166,3 +171,6 @@ No-results state. Search answers common questions straight from the FAQs.
   - Explore option 1 (the search bar as the door, directly under the hero lines) plus fresh concepts.
 - 2026-11-10: Eli picked Fresh 3, "the questions are the door": a glorified FAQ page as the homepage.
   Answers should be polished and sound like Eli speaks. Add big, rounded, close-up studio photos.
+- 2026-11-10: Round 4 layouts rejected: too much crammed into the first screen. The site should read
+  like a scripted, guided tour: small chunks of text, then a visual to breathe on, then the next
+  chunk, with scroll effects and animation guiding people through the message.
