@@ -127,3 +127,6 @@ No-results state. Search answers common questions straight from the FAQs.
   answers most of them want.
 - 2026-11-10: Brand Foundation and the offer are changing. Eli will share a detailed studio doc
   (outline, process, philosophy) to build on; it becomes the source of truth for content.
+- 2026-11-10: What carries forward from Spotlight: every visitor starts by going through one entry
+  point, the search bar. The bar works as a portal or threshold, the way into the site. Not its
+  look, and not the other Spotlight board layouts.
