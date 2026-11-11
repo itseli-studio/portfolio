@@ -1,0 +1,570 @@
+<title>itseli Story</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&family=Caveat:wght@500;600&display=swap">
+<style>
+/* Layout: Eli's eight-step story path, in order, one question per step. Each step is paced as small
+   pieces with a breath between them. Materials from the reference (sage, frosted glass, soft photos),
+   shapes from Mouse (pills, big rounded cards, card stacks). The team is the hero; nothing reads as an app. */
+:root{
+  --paper:#EEF1EC; --blush:#E8E0D9; --mist:#C4D8C6; --sage:#8FA691; --moss:#617A67; --slate:#4B534D;
+  --ink:#1E2521; --muted:#56605A;
+  --glass:rgb(255 255 255 / 18%); --glass-line:rgb(255 255 255 / 38%);
+  --glass-light:rgb(255 255 255 / 60%); --glass-light-line:rgb(255 255 255 / 85%);
+  --shadow:0 30px 70px -36px rgb(40 58 46 / 45%);
+  --f:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --hand:"Caveat","Bradley Hand",cursive;
+  --r-panel:44px; --r-card:28px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+p,h1,h2,h3,ul,ol{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:12px}
+.wrap{max-width:1240px;margin-inline:auto}
+
+/* pills and round buttons */
+.pill{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:999px;font:inherit;font-size:16px;text-decoration:none;white-space:nowrap;cursor:pointer;
+  background:var(--glass);border:1px solid var(--glass-line);color:#FFFFFF;backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);transition:background-color .25s ease,transform .25s ease}
+.pill.solid{background:#FFFFFF;color:var(--ink);border-color:#FFFFFF;box-shadow:0 10px 30px -12px rgb(30 40 34 / 35%)}
+.pill.solid:hover{transform:translateY(-1px)}
+.pill.light{background:var(--glass-light);border-color:var(--glass-light-line);color:var(--ink)}
+.pill.sm{height:40px;padding:0 16px;font-size:14px}
+.round{width:52px;height:52px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--glass-line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#FFFFFF;flex:none}
+.round svg{width:20px;height:20px}
+
+/* header: floating glass pills in story order */
+.top{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:50;padding-top:14px;
+  padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));pointer-events:none}
+.top .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.top a{pointer-events:auto}
+.top .brand{justify-self:start;font-size:19px;font-weight:500}
+.top nav{display:flex;gap:6px;padding:5px;border-radius:999px;background:rgb(255 255 255 / 40%);border:1px solid rgb(255 255 255 / 70%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);pointer-events:auto}
+.top nav a{height:38px;padding:0 16px;display:inline-flex;align-items:center;border-radius:999px;font-size:14px;text-decoration:none;color:var(--ink);transition:background-color .3s ease}
+.top nav a.here{background:#FFFFFF;box-shadow:0 6px 18px -10px rgb(30 40 34 / 40%)}
+.top .pill{background:rgb(255 255 255 / 46%);border-color:rgb(255 255 255 / 70%);color:var(--ink)}
+.top .pill.solid{background:#FFFFFF}
+.top .cta{justify-self:end}
+@media (max-width:900px){.top nav{display:none}.top .wrap{grid-template-columns:1fr auto}}
+
+/* photos (stand-ins, treated like the reference) */
+.photo{position:absolute;inset:0;overflow:hidden;container-type:inline-size;background:var(--mist)}
+.photo .scene{position:absolute;inset:-6%;filter:blur(var(--b,2px)) saturate(.55) contrast(.92) brightness(1.04)}
+.photo .scene .el{position:absolute}
+.photo::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgb(232 224 217 / 45%) 0%,rgb(196 216 198 / 25%) 45%,rgb(97 122 103 / 55%) 100%)}
+.tint .photo::before{background:linear-gradient(180deg,rgb(75 83 77 / 36%) 0%,rgb(75 83 77 / 52%) 50%,rgb(60 72 63 / 72%) 100%)}
+.photo::after{content:"";position:absolute;inset:0;z-index:2;opacity:.22;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.photo .cap{position:absolute;left:16px;bottom:16px;z-index:4;max-width:calc(100% - 32px);padding:6px 12px;border-radius:999px;font-size:12px;line-height:1.3;color:#FFFFFF;background:rgb(30 40 34 / 38%);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.hand{font-family:var(--hand);color:#2C3F5E}
+.panel{position:relative;border-radius:var(--r-panel);overflow:hidden;isolation:isolate;transform-origin:center;will-change:transform;margin-block:2vh}
+.panel>.inner{position:relative;z-index:5}
+
+/* beats */
+.beat{min-height:52vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;padding-block:7vh}
+.beat.short{min-height:36vh}
+.say{font-size:clamp(34px,5vw,68px);line-height:1.02;font-weight:300;letter-spacing:-.04em;max-width:17ch;text-wrap:balance}
+.say.xl{font-size:clamp(42px,7vw,104px);max-width:14ch;line-height:.98}
+.say.md{font-size:clamp(28px,3.6vw,48px);max-width:22ch}
+.sub{font-size:clamp(18px,1.6vw,21px);color:var(--muted);max-width:44ch;line-height:1.5;text-wrap:pretty}
+.label{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:999px;background:var(--glass-light);border:1px solid var(--glass-light-line);font-size:14px;color:var(--moss);box-shadow:0 8px 24px -16px rgb(40 58 46 / 40%)}
+.panel .label{background:var(--glass);border-color:var(--glass-line);color:#FFFFFF;box-shadow:none}
+.row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.rise{opacity:.4;transform:translateY(22px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.rise.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* glass cards */
+.glass{background:var(--glass-light);border:1px solid var(--glass-light-line);backdrop-filter:blur(26px) saturate(1.2);-webkit-backdrop-filter:blur(26px) saturate(1.2);border-radius:var(--r-card);box-shadow:var(--shadow)}
+.grid{display:grid;gap:16px;padding-block:3vh 8vh}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid .glass{padding:30px;display:flex;flex-direction:column;gap:12px;background:rgb(255 255 255 / 66%)}
+.grid h3{font-size:22px;font-weight:400;letter-spacing:-.02em;line-height:1.2}
+.grid p{color:var(--muted)}
+.grid .glass.dark{background:var(--slate);border-color:var(--slate);color:#FFFFFF}
+.grid .glass.dark p{color:#D7DED8}
+.quote{font-size:clamp(20px,2vw,25px);line-height:1.38;letter-spacing:-.015em;color:var(--ink)!important}
+@media (max-width:900px){.g2,.g3{grid-template-columns:1fr}}
+
+/* step 1: the hero panel */
+.hero{min-height:min(94vh,920px);margin-top:12px;display:flex;align-items:flex-end}
+.hero .inner{width:100%;padding:clamp(28px,6vw,80px);padding-bottom:clamp(40px,8vh,96px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;color:#FFFFFF}
+.hero .sub{color:rgb(255 255 255 / 90%)}
+.notes{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding-block:2vh 6vh}
+.sticky{width:min(340px,100%);min-height:200px;padding:26px;border-radius:22px;display:flex;align-items:flex-end;text-align:left;font-size:clamp(20px,2vw,24px);line-height:1.3;letter-spacing:-.015em}
+.sticky:nth-child(1){transform:rotate(-2deg)}.sticky:nth-child(2){transform:rotate(2deg)}
+
+/* panels with a glass card on them */
+.cardpanel{min-height:min(84vh,820px);display:flex;align-items:center;justify-content:center}
+.cardpanel .glass{max-width:660px;margin:24px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:16px}
+.bigline{min-height:min(84vh,820px);display:flex;align-items:center;justify-content:center}
+.bigline .inner{padding:clamp(28px,6vw,80px);text-align:center;color:#FFFFFF}
+
+/* step 3: team */
+.team{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding-block:2vh 6vh}
+.person{padding:22px 18px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.person .av{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:500;color:#FFFFFF;background:radial-gradient(circle at 35% 30%,#A9BDA9,#5E7763)}
+.person b{font-weight:500;font-size:18px;display:block}
+.person span{color:var(--muted);font-size:15px}
+@media (max-width:900px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.morning{max-width:760px;margin:0 auto 8vh;padding:30px}
+.morning h3{font-size:18px;font-weight:400;color:var(--muted);margin-bottom:10px}
+.morning ol{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 28px}
+.morning li{padding:10px 0;border-top:1px solid rgb(30 37 33 / 10%);font-size:16px}
+.morning li b{font-weight:500;display:block}
+.morning li span{color:var(--muted);font-size:15px}
+@media (max-width:700px){.morning ol{grid-template-columns:1fr}}
+
+/* step 4: months */
+.months{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding-block:2vh 6vh}
+.month{padding:24px;display:flex;flex-direction:column;gap:6px;min-height:170px}
+.month small{font-size:14px;color:var(--moss)}
+.month b{font-size:21px;font-weight:400;letter-spacing:-.02em}
+.month span{color:var(--muted);font-size:15px}
+.month.opt{background:transparent;border-style:dashed;border-color:rgb(30 37 33 / 22%);box-shadow:none;backdrop-filter:none}
+@media (max-width:900px){.months{grid-template-columns:1fr 1fr}}
+.chapter{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding-top:10vh}
+.qcards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding-block:4vh 6vh}
+.qcard{position:relative;height:300px;border-radius:var(--r-card);overflow:hidden;isolation:isolate;color:#FFFFFF}
+.qcard .inner{position:absolute;inset:0;z-index:5;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
+.qcard .cap{display:none}
+.qcard h3{font-size:22px;font-weight:300;letter-spacing:-.02em;line-height:1.15}
+@media (max-width:900px){.qcards{grid-template-columns:1fr 1fr}.qcard{height:240px}}
+.session{min-height:min(96vh,940px);display:flex;align-items:center;justify-content:center;padding:64px 20px}
+.transcript{position:relative;z-index:5;width:min(680px,100%);padding:clamp(24px,4vw,44px);display:flex;flex-direction:column;gap:22px;background:rgb(255 255 255 / 70%)}
+.transcript header{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px;color:var(--muted)}
+.turn{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:baseline}
+.turn b{font-weight:500;font-size:14px;color:var(--moss)}
+.turn p{font-size:clamp(17px,1.6vw,20px);line-height:1.5}
+.turn.team p{font-size:clamp(19px,1.8vw,23px);letter-spacing:-.01em}
+@media (max-width:600px){.turn{grid-template-columns:1fr;gap:4px}}
+.alerts{min-height:min(96vh,940px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:64px 20px}
+.stack{position:relative;z-index:5;width:min(520px,100%);height:280px}
+.alert{position:absolute;inset:0 0 auto 0;height:240px;padding:28px;border-radius:var(--r-card);display:flex;flex-direction:column;gap:14px;
+  background:rgb(255 255 255 / 66%);border:1px solid rgb(255 255 255 / 88%);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:var(--shadow);transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.alert b{font-weight:500;font-size:16px;display:flex;align-items:center;gap:10px}
+.alert b::before{content:"";width:10px;height:10px;border-radius:50%;background:#B8664A}
+.alert p{font-size:clamp(18px,1.8vw,21px);line-height:1.42;letter-spacing:-.01em}
+.alert:nth-child(1){transform:rotate(-4deg) translate(-12px,10px)}
+.alert:nth-child(2){transform:rotate(3deg) translate(12px,4px)}
+.stack.in .alert:nth-child(1){transform:rotate(-8deg) translate(-64px,34px)}
+.stack.in .alert:nth-child(2){transform:rotate(6deg) translate(60px,16px)}
+.stack.in .alert:nth-child(3){transform:translateY(-10px)}
+@media (max-width:600px){.stack.in .alert:nth-child(1){transform:rotate(-5deg) translate(-12px,26px)}.stack.in .alert:nth-child(2){transform:rotate(4deg) translate(12px,14px)}}
+.alerts .label{position:relative;z-index:5}
+.todo{max-width:620px;margin:0 auto;padding:30px;display:flex;flex-direction:column;gap:6px}
+.todo h3{font-size:18px;font-weight:400;color:var(--muted);margin-bottom:6px}
+.todo li{list-style:none;display:flex;gap:14px;align-items:center;padding:14px 0;border-top:1px solid rgb(30 37 33 / 10%);font-size:18px}
+.todo li i{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--moss);flex:none}
+.todo ul{padding:0}
+
+/* step 5 */
+.wish{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-block:3vh 8vh}
+.wish .glass{padding:26px;display:flex;flex-direction:column;gap:8px;background:rgb(255 255 255 / 66%)}
+.wish b{font-weight:500;font-size:19px;letter-spacing:-.01em}
+.wish span{color:var(--muted);font-size:16px}
+@media (max-width:900px){.wish{grid-template-columns:1fr}}
+
+/* step 6 */
+.work{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-block:3vh 8vh}
+.wcard{display:flex;flex-direction:column;gap:14px;text-decoration:none}
+.wcard .pic{position:relative;height:min(56vh,520px);border-radius:var(--r-card);overflow:hidden;isolation:isolate}
+.wcard b{font-weight:400;font-size:22px;letter-spacing:-.02em}
+.wcard span{color:var(--muted)}
+@media (max-width:900px){.work{grid-template-columns:1fr}}
+
+/* step 7 */
+.price{max-width:860px;margin:0 auto;padding:clamp(26px,4vw,48px);display:flex;flex-direction:column;gap:20px}
+.price .lead{font-size:clamp(20px,2vw,25px);line-height:1.38;letter-spacing:-.015em}
+.prow{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:18px 0;border-top:1px solid rgb(30 37 33 / 12%)}
+.prow b{font-weight:400;font-size:clamp(18px,1.7vw,21px)}
+.prow span{font-size:clamp(24px,2.6vw,34px);font-weight:300;letter-spacing:-.025em;white-space:nowrap}
+.price small{color:var(--muted);font-size:15px}
+.faq{max-width:860px;margin:4vh auto 10vh;padding:12px 30px}
+.faq details{border-top:1px solid rgb(30 37 33 / 10%)}
+.faq details:first-of-type{border-top:0}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:60px;padding:12px 0;font-size:18px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:24px;font-weight:300;color:var(--moss);transition:transform .3s ease}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 18px;color:var(--muted);max-width:62ch}
+
+/* step 8 */
+.close{min-height:min(92vh,900px);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.close .inner{max-width:760px;padding:clamp(28px,6vw,72px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:26px;color:#FFFFFF}
+.form{width:min(560px,100%);padding:26px;display:flex;flex-direction:column;gap:14px;text-align:left;color:var(--ink);background:rgb(255 255 255 / 78%)}
+.form label{font-size:14px;color:var(--muted)}
+.form input,.form textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:rgb(255 255 255 / 80%);border:1px solid rgb(30 37 33 / 16%);border-radius:16px;padding:12px 14px}
+.form textarea{min-height:84px;resize:vertical}
+.form input:focus,.form textarea:focus{outline:2px solid var(--moss);outline-offset:1px}
+.form .f{display:flex;flex-direction:column;gap:6px}
+.form .ok{font-size:15px;color:var(--moss)}
+footer{padding:28px 12px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:14px}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rise{opacity:1;transform:none;transition:none}
+  .panel{transform:none!important}
+  .alert,.faq summary::after{transition:none}
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="pill brand" href="#top">itseli</a>
+    <nav aria-label="Main">
+      <a href="#who-we-are" data-step="who-we-are">Who we are</a>
+      <a href="#what-we-do" data-step="what-we-do">What we do</a>
+      <a href="#who-we-serve" data-step="who-we-serve">Who we serve</a>
+    </nav>
+    <a class="pill solid cta" href="#work-with-us">Work with us</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+
+    <!-- 1. The problem -->
+    <section id="the-problem" aria-label="The problem">
+      <div class="panel hero tint" data-photo="stressballs" data-blur="16">
+        <div class="inner">
+          <h1 class="say xl">Most businesses make brand decisions in the dark</h1>
+          <p class="sub">They're either guessing what “feels right,” second-guessing every move, or sitting on strategy decks they don’t know how to use</p>
+        </div>
+      </div>
+      <div class="beat">
+        <span class="label rise">You can’t scale confusion</span>
+        <p class="say rise d1">Good brands don’t guess</p>
+      </div>
+      <div class="notes">
+        <p class="glass sticky rise">Stop asking your cousin if it “feels right.”</p>
+        <p class="glass sticky rise d1">Stop staring at that Google Doc again. Come talk to the team.</p>
+      </div>
+      <div class="beat short">
+        <p class="say rise">Itseli changes that</p>
+        <a class="round rise d1" href="#why-now" aria-label="Keep going" style="background:var(--glass-light);border-color:var(--glass-light-line);color:var(--ink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      </div>
+    </section>
+
+    <!-- 2. Why it matters now -->
+    <section id="why-now" aria-label="Why it matters now">
+      <div class="beat">
+        <p class="say rise">Making something look good isn't the same as having something worth saying.</p>
+      </div>
+      <div class="panel bigline tint" data-photo="napkin" data-blur="8">
+        <div class="inner"><p class="say xl" style="margin-inline:auto">In a world of AI, the only thing you own is your message.</p></div>
+      </div>
+      <div class="beat short">
+        <p class="say rise">Great branding doesn’t start with Canva. It starts with Clarity.</p>
+      </div>
+      <div class="grid g3">
+        <article class="glass rise"><p class="quote">You can make the files yourself now. The question is whether you can tell which story is true.</p></article>
+        <article class="glass dark rise d1"><p class="quote" style="color:#FFFFFF!important">A decent logo, ad, or caption is no longer scarce. What is scarce is a partner who will tell you when the flattering story is the wrong one, and who will stay until the work is actually right.</p></article>
+        <article class="glass rise d2"><p class="quote">We use every tool that makes production better and faster, including AI. We do not sell you the tool. We sell you the decision and the craft.</p></article>
+      </div>
+      <div class="beat short">
+        <p class="say md rise">A pretty campaign on a weak position is still a weak position.</p>
+      </div>
+    </section>
+
+    <!-- 3. Who we are -->
+    <section id="who-we-are" aria-label="Who we are">
+      <div class="beat">
+        <span class="label rise">What is Itseli?</span>
+        <p class="say rise d1">The smartest partner you’ll ever talk to. (No offense, Steve)</p>
+        <p class="sub rise d2">A new, systematic approach to brand decision-making</p>
+      </div>
+      <div class="panel cardpanel" data-photo="stressballs2" data-blur="7">
+        <div class="inner"><div class="glass rise"><p class="quote">Itseli helps you make better brand decisions by analyzing, scoring, and aligning everything we learn about you to your core identity. While today’s AI chats are designed to answer questions, Itseli is designed to ask them. We learn you. Think with you. And help point you in the right direction.</p></div></div>
+      </div>
+      <div class="beat short">
+        <p class="say rise">A “thank-God-someone-gets-me” team.</p>
+        <p class="sub rise d1">Itseli is: A brand clarity builder. A bridge between strategy and action.</p>
+      </div>
+      <div class="grid g3">
+        <article class="glass rise"><h3>Empathy Over Ego</h3><p>We listen to understand, ensuring every decision is rooted in your needs, not our assumptions.</p></article>
+        <article class="glass rise d1"><h3>Integrity Over Shortcuts</h3><p>We choose what’s right, even when it’s not the easiest path.</p></article>
+        <article class="glass rise d2"><h3>Clarity Over Noise</h3><p>We focus on delivering work that is clear, impactful, and aligned with your vision.</p></article>
+      </div>
+      <div class="team" aria-label="The team">
+        <div class="glass person rise"><span class="av" aria-hidden="true">E</span><div><b>Eli</b><span>Creative direction</span></div></div>
+        <div class="glass person rise d1"><span class="av" aria-hidden="true">N</span><div><b>Nelly</b><span>Creative assistant</span></div></div>
+        <div class="glass person rise d2"><span class="av" aria-hidden="true">S</span><div><b>Sarah</b><span>Studio Operations</span></div></div>
+        <div class="glass person rise d3"><span class="av" aria-hidden="true">C</span><div><b>Chani</b><span>Design</span></div></div>
+        <div class="glass person rise d3"><span class="av" aria-hidden="true">E</span><div><b>Esti</b><span>Design</span></div></div>
+      </div>
+      <div class="beat short">
+        <p class="say md rise">We will not promise what we cannot deliver.</p>
+      </div>
+      <div class="glass morning rise">
+        <h3>6 things we tell ourselves every morning (or at least when we remember)</h3>
+        <ol>
+          <li><b>Simplify Everything</b><span>The message, the design, the strategy. The simpler it is, the more powerful it becomes.</span></li>
+          <li><b>Push Yourself to Think Differently</b><span>Don’t settle for the obvious solution. Zig where others zag.</span></li>
+          <li><b>Always Be a Student</b><span>Continuously learn and explore to bring fresh ideas and perspectives to the table.</span></li>
+          <li><b>Realize the Human in All Interactions</b><span>Take the time to truly listen to your clients’ challenges and goals.</span></li>
+          <li><b>Keep Your Eye on the North Star</b><span>Every design, message, or strategy should reinforce its core objective.</span></li>
+          <li><b>Sprinkle in some character</b><span>Don’t take yourself so seriously, have fun with it.</span></li>
+        </ol>
+      </div>
+      <div class="beat short">
+        <p class="say md rise">We’re not here to change the world. That’s your job. We’re just here to help.</p>
+      </div>
+    </section>
+
+    <!-- 4. What we do -->
+    <section id="what-we-do" aria-label="What we do">
+      <div class="beat">
+        <p class="say rise">We help you find what you actually stand for, say it honestly, and keep it straight everywhere.</p>
+        <p class="sub rise d1">We start with brand, messaging, and positioning, even if you came for a logo or a set of ads.</p>
+      </div>
+      <p class="sub rise" style="text-align:center;margin-inline:auto">Month one is the message. Month two is the look. Month three, we finish, hand off, and start on your first touch points. After that, staying on is optional.</p>
+      <div class="months">
+        <a class="glass month rise" href="#month-1"><small>Month 1</small><b>The Message</b><span>Messaging only. No design.</span></a>
+        <a class="glass month rise d1" href="#month-2"><small>Month 2</small><b>The Look</b><span>Visual identity, built on the message.</span></a>
+        <a class="glass month rise d2" href="#month-3"><small>Month 3</small><b>Finish &amp; Hand Off</b><span>Files handed over, first touch points started.</span></a>
+        <a class="glass month opt rise d3" href="#after"><small>After that</small><b>Optional</b><span>Stay on as your brand guardian.</span></a>
+      </div>
+
+      <div class="chapter" id="month-1">
+        <span class="label rise">Month 1: The Message</span>
+        <p class="say rise d1">It’s about time you had a DMC with your business</p>
+      </div>
+      <div class="qcards">
+        <div class="qcard tint rise" data-photo="notepad" data-blur="3"><div class="inner"><h3>What do you aim to help people do?</h3><span class="pill sm" style="align-self:flex-start">Month 1</span></div></div>
+        <div class="qcard tint rise d1" data-photo="plants" data-blur="3"><div class="inner"><h3>Who are you?</h3><span class="pill sm" style="align-self:flex-start">Month 1</span></div></div>
+        <div class="qcard tint rise d2" data-photo="stickies" data-blur="3"><div class="inner"><h3>What are your rules?</h3><span class="pill sm" style="align-self:flex-start">Month 1</span></div></div>
+        <div class="qcard tint rise d3" data-photo="coffee" data-blur="3"><div class="inner"><h3>Why do you exist?</h3><span class="pill sm" style="align-self:flex-start">Month 1</span></div></div>
+      </div>
+      <div class="panel session" data-photo="coffee2" data-blur="14" aria-label="What month one sounds like">
+        <article class="glass transcript rise">
+          <header><span>What month one sounds like</span><span class="label" style="height:30px;font-size:13px">From a working session</span></header>
+          <div class="turn"><b>Founder</b><p>I'm thinking of launching a line of adaptogenic drink mixes but I’m not sure if it fits the brand</p></div>
+          <div class="turn team"><b>itseli team</b><p>Interesting move. Back when we talked about your mission, you said your whole thing was “helping stressed-out millennials build better rituals without feeling like they’re in a wellness cult.” Do these drink mixes support that mission or do they risk feeling like just another trendy product?</p></div>
+        </article>
+      </div>
+      <div class="beat short">
+        <p class="say md rise">Whatever you came in for, the first 30 days are not a stream of deliverables. We use that time to get the message straight. After that, the work has somewhere to stand.</p>
+      </div>
+      <div class="glass rise" style="max-width:860px;margin:0 auto;padding:clamp(26px,4vw,44px)">
+        <p class="quote">Itseli isn’t where you wordsmith your mission statement it’s where you strip the polish off and get brutally clear. You might say ‘people’ on your website, but here, we want to know exactly who you’re talking about. Is it 40-year-old creative dads? Single moms in Brooklyn? First-time startup founders? That’s the clarity we’re after.</p>
+      </div>
+      <div class="beat short">
+        <p class="say rise">Clarify before you strategize.</p>
+        <p class="sub rise d1">Less brainstorm, More brain</p>
+      </div>
+      <div class="beat short">
+        <p class="say md rise">“We’re all about connection, impact, and innovation” - Congrats, you said nothing. The team remembers.</p>
+      </div>
+      <div class="panel alerts" data-photo="stickies" data-blur="10" aria-label="What the team catches">
+        <span class="label">What the team catches</span>
+        <div class="stack" id="stack">
+          <article class="alert"><b>Inconsistency alert</b><p>You described your audience as busy professionals, but your product requires a lot of hands-on time.</p></article>
+          <article class="alert"><b>Inconsistency alert</b><p>your vision talks about scaling across the country, but your story is all about staying local.</p></article>
+          <article class="alert"><b>Inconsistency alert</b><p>Your values emphasize transparency, but your About page doesn’t mention who’s behind the brand.</p></article>
+        </div>
+      </div>
+      <div class="beat short">
+        <p class="say md rise">We would rather tell you something inconvenient now than make you something polished that is built on an illusion.</p>
+      </div>
+
+      <div class="chapter" id="month-2">
+        <span class="label rise">Month 2: The Look (Visual Identity)</span>
+        <p class="say rise d1">Never say “back to the drawing board” again</p>
+      </div>
+      <div class="work" aria-label="Month two, from a real brand identity presentation">
+        <div class="wcard rise"><div class="pic" data-photo="notepad" data-blur="2"></div><b>Concepts</b><span>[From a real brand identity presentation]</span></div>
+        <div class="wcard rise d1"><div class="pic" data-photo="stickies" data-blur="2"></div><b>Style guide</b><span>[From a real brand identity presentation]</span></div>
+        <div class="wcard rise d2"><div class="pic" data-photo="coffee" data-blur="2"></div><b>Mockups</b><span>[Packaging, marketing, advertising, brand experience]</span></div>
+      </div>
+
+      <div class="chapter" id="month-3" style="padding-top:4vh">
+        <span class="label rise">Month 3: Finish &amp; Hand Off</span>
+        <p class="say md rise d1">First, we figure out the key messages you want your customers to know. Then we go through every place they meet you and make sure that message comes across clearly, one touch point at a time.</p>
+      </div>
+      <div class="glass todo rise" style="margin-top:5vh">
+        <h3>Things to work on</h3>
+        <ul>
+          <li><i aria-hidden="true"></i>Tie up loose ends</li>
+          <li><i aria-hidden="true"></i>Hand over your files</li>
+          <li><i aria-hidden="true"></i>Start your first one or two touch points</li>
+        </ul>
+      </div>
+      <div class="beat short">
+        <p class="say md rise">Some months are quieter than others. The point is not a pile of files. The point is that the work is right.</p>
+      </div>
+
+      <div class="chapter" id="after" style="padding-top:2vh">
+        <span class="label rise">After the sprint</span>
+        <p class="say md rise d1">Working with us is access to our thinking and our work, not a monthly quota of files.</p>
+      </div>
+      <div class="grid g2" style="padding-bottom:10vh">
+        <article class="glass rise"><h3>Itseli is not: A one-time brand team.</h3></article>
+        <article class="glass rise d1"><p class="quote">Most tools treat brand strategy as a static exercise. Itseli treats it as a living habit with measurable depth.</p></article>
+      </div>
+    </section>
+
+    <!-- 5. Who we serve -->
+    <section id="who-we-serve" aria-label="Who we serve">
+      <div class="beat">
+        <span class="label rise">Your brand guardian.</span>
+        <p class="say md rise d1">If you're the founder of a food business doing $3M+ a year, and you're tired of keeping your message straight across every moving part, we're a small team of writers and designers ready to be your brand guardian.</p>
+      </div>
+      <div class="panel cardpanel" data-photo="plants" data-blur="7">
+        <div class="inner"><div class="glass rise"><p class="quote">If you run a restaurant or a catering business, branding will not replace the thing that actually builds your name: excellent service, again and again. We are here to support that, not to pretend otherwise.</p></div></div>
+      </div>
+      <p class="sub rise" style="text-align:center;margin:8vh auto 0">6 things we wish we knew sooner</p>
+      <div class="wish">
+        <div class="glass rise"><b>Your logo is NOT everything</b><span>Your logo is a starting point, but it’s the consistency and clarity of your overall brand identity that drives recognition and loyalty.</span></div>
+        <div class="glass rise d1"><b>Don't try to sell to everyone</b><span>Focusing on a niche audience with a clear message can be far more effective than casting a wide net.</span></div>
+        <div class="glass rise d2"><b>Stop yelling at your customers</b><span>Clear and thoughtful communication will always outperform noisy brands with no substance.</span></div>
+        <div class="glass rise"><b>Branding won't always solve all your problems</b><span>As much as we love branding, if your product, service, or customer experience sucks, no logo, tagline, or clever campaign will save you.</span></div>
+        <div class="glass rise d1"><b>It’s not always about you</b><span>Your business should be 20% about you and 80% about the customer you're helping.</span></div>
+        <div class="glass rise d2"><b>You got this</b><span>Stay focused, take measured risks, and have one hell of a time.</span></div>
+      </div>
+    </section>
+
+    <!-- 6. Proof -->
+    <section id="proof" aria-label="Selected work">
+      <div class="beat">
+        <p class="say rise">99% less ‘What the hell are we doing?’ moments.</p>
+      </div>
+      <div class="work">
+        <a class="wcard rise" href="#proof"><div class="pic" data-photo="stressballs" data-blur="4"></div><b>[Project name]</b><span>[The story they came in with, and the true one we found]</span></a>
+        <a class="wcard rise d1" href="#proof"><div class="pic" data-photo="napkin" data-blur="4"></div><b>[Project name]</b><span>[The story they came in with, and the true one we found]</span></a>
+        <a class="wcard rise d2" href="#proof"><div class="pic" data-photo="plants" data-blur="4"></div><b>[Project name]</b><span>[The story they came in with, and the true one we found]</span></a>
+      </div>
+    </section>
+
+    <!-- 7. Price and how it works -->
+    <section id="price" aria-label="Price and how it works">
+      <div class="beat">
+        <p class="say md rise">People are not paying $24,000 for a file they could prompt. They are paying for someone who will tell them the truth and make it look like it.</p>
+      </div>
+      <div class="glass price rise">
+        <p class="lead">Every engagement starts with a three-month sprint for $24,000. After that, part ways, stay on at $6,000 a month, or lock in six months at $5,000 a month.</p>
+        <div>
+          <div class="prow"><b>The 3-Month Brand Sprint</b><span>$24,000</span></div>
+          <div class="prow"><b>After the sprint, month to month</b><span>$6,000 a month</span></div>
+          <div class="prow"><b>After the sprint, 6-month commitment</b><span>$5,000 a month</span></div>
+        </div>
+        <small>Payment: 3 monthly payments of $8,000, or 50% to start and 50% at the end of month 3.</small>
+      </div>
+      <div class="glass faq rise">
+        <details><summary>How much does it cost, and how do I pay?</summary><p>The 3-Month Brand Sprint is $24,000. You can pay in three monthly payments of $8,000, or 50% to start and 50% at the end of month 3. Work starts when the first payment is in.</p></details>
+        <details><summary>What if we finish early?</summary><p>The fee covers the full sprint, even if we wrap sooner. You are buying the engagement, not a month-by-month menu.</p></details>
+        <details><summary>What happens in month 3?</summary><p>We finish and hand off: tie up loose ends, hand over your files, and start on your first one or two touch points. If you continue, the ongoing work starts here too. Month 3 is not a full list of deliverables; it closes out the identity work properly.</p></details>
+        <details><summary>Do I have to continue after 3 months?</summary><p>No. After the sprint you can part ways, or stay on. Continuing is optional.</p></details>
+        <details><summary>What does month to month vs. a 6-month commitment cost?</summary><p>Month to month is $6,000/month. A 6-month commitment is $5,000/month, a lower rate for a long-term partnership. Either side can end either option with 30 days' written notice. Nothing further is owed. Payments already made are not refunded.</p></details>
+        <details><summary>What if a payment is late?</summary><p>Work pauses until the payment comes in. The payment date and the schedule stay the same, so paused days are not added back. Fees do not change.</p></details>
+        <details><summary>What if I need more time to give feedback?</summary><p>We plan around replies within 3 to 5 business days. If a reply takes longer, the timeline stays the same and less time remains, so we fit the scope to the time left or add time at $300/hour. Fees and payment dates stay the same either way.</p></details>
+        <details><summary>Who signs off?</summary><p>One named representative gives written sign-off (email is fine) at the end of each step. The next step starts after that.</p></details>
+        <details><summary>Can we skip to design, or ask for extras early?</summary><p>No design until the message is signed off. Extra requests get scheduled into the right step, or done at $300/hour.</p></details>
+        <details><summary>Who owns the work?</summary><p>Final approved work becomes yours once the sprint is paid in full. Unused concepts and drafts stay with the studio. We may show the work in our portfolio.</p></details>
+        <details><summary>Are payments refundable?</summary><p>Payments are non-refundable.</p></details>
+        <details><summary>What are your hours?</summary><p>We work 9:00 AM to 5:00 PM. Closed on Shabbos and Jewish holidays. Same-day turnaround is not part of the service.</p></details>
+        <details><summary>Do you use AI?</summary><p>We utilize AI as much as possible to the extent that it helps us get a better result for your message and identity. We refuse to simply use AI to cut corners on turnaround time and mediocre results just because the client is OK with it.</p></details>
+      </div>
+    </section>
+
+    <!-- 8. Work with us -->
+    <section class="panel close tint" id="work-with-us" data-photo="coffee2" data-blur="14" aria-label="Work with us">
+      <div class="inner">
+        <p class="say md">If that sounds like how you want to work, tell us what you are building.</p>
+        <button class="pill solid" type="button" id="open-form" aria-expanded="false" aria-controls="wform">Work with us</button>
+        <form class="glass form" id="wform" hidden novalidate>
+          <div class="f"><label for="f-who">Who are you?</label><input id="f-who" name="who" autocomplete="name" placeholder="Your name and your business"></div>
+          <div class="f"><label for="f-need">What do you think you need?</label><input id="f-need" name="need" placeholder="A logo, a new menu, a rebrand, not sure yet"></div>
+          <div class="f"><label for="f-real">What is actually going on in the business?</label><textarea id="f-real" name="real" placeholder="A few honest sentences is plenty"></textarea></div>
+          <button class="pill solid" type="submit" style="align-self:flex-start;background:var(--ink);color:#FFFFFF;border-color:var(--ink)">Send</button>
+          <p class="ok" id="f-ok" hidden>Prototype only, so nothing was sent.</p>
+        </form>
+      </div>
+    </section>
+
+    <footer><span>itseli · Lakewood, New Jersey</span><span>Story prototype. Photos and project names are labeled stand-ins.</span></footer>
+  </div>
+</main>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- photo stand-ins, softened like the reference (swap for real studio photos) ---- */
+  const ball = (l,t,w,c) => `<span class="el" style="left:${l}%;top:${t}%;width:${w}%;aspect-ratio:1;border-radius:50%;background:${c};box-shadow:inset -1.6cqw -2cqw 3.6cqw rgb(0 0 0 / 18%),0 2.4cqw 3.6cqw -1.4cqw rgb(70 40 20 / 40%)"></span>`;
+  const note = (l,t,c,r,txt) => `<span class="el hand" style="left:${l}%;top:${t}%;width:24%;aspect-ratio:1;background:${c};transform:rotate(${r}deg);box-shadow:0 1.4cqw 2.2cqw -1.2cqw rgb(0 0 0 / 30%);padding:1.6cqw;font-size:3.1cqw;line-height:1.05;color:#2A2A2A">${txt}</span>`;
+  const leaf = (l,t,w,h,c,r) => `<span class="el" style="left:${l}%;top:${t}%;width:${w}%;height:${h}%;border-radius:50%;background:${c};transform:rotate(${r}deg)"></span>`;
+  const cup = (cx,cy,s) => `
+    <span class="el" style="left:${cx}%;top:${cy}%;width:${s}%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#F4F1EC;box-shadow:0 3cqw 5cqw -2.4cqw rgb(60 40 20 / 45%)"></span>
+    <span class="el" style="left:${cx}%;top:${cy}%;width:${s*.72}%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#FFFFFF"></span>
+    <span class="el" style="left:${cx}%;top:${cy}%;width:${s*.6}%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#5E3F2C;border:1cqw solid #9C6B47"></span>`;
+  const S = {
+    stressballs:{bg:'#D9D3C9',cap:'a pile of stress balls on the studio desk',html:ball(4,30,24,'#E8613C')+ball(24,6,20,'#F2C14E')+ball(25,44,27,'#6C9BD2')+ball(46,20,22,'#7FB77E')+ball(50,56,19,'#E58FB1')+ball(66,34,18,'#F2C14E')+ball(78,8,16,'#7FB77E')+ball(80,58,17,'#6C9BD2')},
+    stressballs2:{bg:'#D7DCD3',cap:'one stress ball in an open hand',html:`<span class="el" style="left:16%;top:34%;width:70%;height:76%;border-radius:45% 45% 0 0;background:#E2B99B"></span>`+ball(32,14,40,'#E8613C')},
+    napkin:{bg:'#CDBFAE',cap:'a napkin doodle on a cafe table',html:`<span class="el hand" style="left:26%;top:10%;width:46%;aspect-ratio:1;background:#FBF9F4;transform:rotate(-5deg);box-shadow:0 2cqw 3.6cqw -1.8cqw rgb(60 40 20 / 40%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1cqw"><span style="font-size:5.2cqw;line-height:1">looks good</span><span style="font-size:3.2cqw">≠</span><span style="font-size:5.2cqw;line-height:1;text-decoration:underline wavy #2C3F5E;text-underline-offset:1cqw">worth saying</span></span>`},
+    coffee:{bg:'#D6CBBD',cap:'coffee from above on the meeting table',html:cup(64,50,34)+`<span class="el" style="left:8%;top:14%;width:26%;height:72%;background:#FCFBF7;transform:rotate(-4deg)"></span>`},
+    coffee2:{bg:'#D2C6B6',cap:'two coffees mid-conversation',html:cup(32,52,28)+cup(68,46,28)+note(43,10,'#F6E27A',-6,'message first')},
+    stickies:{bg:'#D6D1C7',cap:'sticky notes on the wall from a message session',html:note(6,8,'#F6E27A',-4,'who is this for?')+note(38,4,'#F4A7B9',3,"what's actually true?")+note(70,10,'#F7B267',-2,'too many words')+note(11,54,'#A9CCE3',2,'month 1: the message')+note(42,52,'#F6E27A',-3,'month 2: the look')+note(72,56,'#F4A7B9',4,'month 3: hand it off')},
+    notepad:{bg:'#D3CCC0',cap:'a ruled notepad with handwritten notes',html:`<span class="el hand" style="left:16%;top:8%;width:62%;height:90%;background-color:#FCFBF7;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 5cqw,#C9D6E8 5cqw,#C9D6E8 calc(5cqw + 1px));transform:rotate(3deg);border-left:2px solid #E3A1A1;padding:6cqw 4cqw 0 6cqw;font-size:5cqw;line-height:5cqw"><span style="display:block">month 1</span><span style="display:block">month 2</span><span style="display:block">month 3</span><span style="display:block;text-decoration:line-through">logo first</span></span>`},
+    plants:{bg:'#D5DDD2',cap:'a studio plant in morning light',html:leaf(30,8,16,40,'#6E8B5E',-28)+leaf(44,2,15,44,'#4F6B45',6)+leaf(54,10,16,38,'#8FAE7A',32)+leaf(22,30,15,30,'#8FAE7A',-52)+leaf(60,30,15,30,'#6E8B5E',56)+`<span class="el" style="left:34%;top:62%;width:32%;height:36%;border-radius:2cqw;background:#CFC9BF"></span>`}
+  };
+  document.querySelectorAll('[data-photo]').forEach(el => {
+    const s = S[el.dataset.photo] || S.stressballs;
+    const ph = document.createElement('div');
+    ph.className = 'photo';
+    ph.setAttribute('role','img');
+    ph.setAttribute('aria-label','Placeholder for a photo: ' + s.cap);
+    ph.style.setProperty('--b', (el.dataset.blur || 2) + 'px');
+    ph.innerHTML = `<div class="scene" style="background:${s.bg}">${s.html}</div><span class="cap">Photo to shoot: ${s.cap}</span>`;
+    el.prepend(ph);
+  });
+
+  /* ---- Work with us opens the short form ---- */
+  const btn = document.getElementById('open-form'), form = document.getElementById('wform');
+  btn.addEventListener('click', () => { form.hidden = false; btn.setAttribute('aria-expanded','true'); btn.hidden = true; document.getElementById('f-who').focus(); });
+  form.addEventListener('submit', e => { e.preventDefault(); document.getElementById('f-ok').hidden = false; });
+
+  /* ---- nav pill follows the story ---- */
+  const navLinks = [...document.querySelectorAll('.top nav a')];
+  const steps = navLinks.map(a => document.getElementById(a.dataset.step));
+  const markNav = () => {
+    const y = innerHeight * .35; let cur = null;
+    steps.forEach((s,i) => { const r = s.getBoundingClientRect(); if (r.top <= y && r.bottom > y) cur = i; });
+    navLinks.forEach((a,i) => a.classList.toggle('here', i === cur));
+  };
+
+  if (reduce) {
+    document.querySelectorAll('.rise').forEach(e => e.classList.add('in'));
+    document.getElementById('stack').classList.add('in');
+    addEventListener('scroll', markNav, { passive:true }); markNav();
+    return;
+  }
+
+  /* ---- arrivals: each piece settles as it reaches you ---- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); else if (e.boundingClientRect.top > 0) e.target.classList.remove('in'); }), { rootMargin: '0px 0px -16% 0px' });
+  document.querySelectorAll('.rise, #stack').forEach(el => io.observe(el));
+
+  /* ---- photo panels breathe in as they arrive ---- */
+  const panels = [...document.querySelectorAll('.panel:not(.hero)')];
+  const frame = () => {
+    const vh = innerHeight;
+    for (const p of panels) {
+      const r = p.getBoundingClientRect();
+      const t = Math.max(0, Math.min(1, (vh - r.top) / (vh * .8)));
+      p.style.transform = `scale(${.93 + .07 * t})`;
+    }
+    markNav();
+  };
+  let tick = false;
+  addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(() => { frame(); tick = false; }); } }, { passive: true });
+  addEventListener('resize', frame);
+  frame();
+})();
+</script>

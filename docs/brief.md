@@ -128,6 +128,9 @@ No-results state. Search answers common questions straight from the FAQs.
 - `docs/concepts/03-glass.html` (2026-11-11): "Glass", style prototype of the homepage. Tour
   pacing + Mouse layouts + the reference materials. Artifact:
   https://claude.ai/artifact/TxUXmz6AhAhQ4KMZCFc4bB
+- `docs/concepts/04-story.html` (2026-11-11): "Story", the homepage following the doc's eight-step
+  story path in order, every approved line used once, glass style kept, no chatbot feel, "Work with
+  us" as the only button. Artifact: https://claude.ai/artifact/X4UhEjKBfFEcmg5xTGpKR1
 - Same canvas, page "Round 4 · The questions" (2026-11-10): Fresh 3 developed. V1 split (questions
   left, image right), V2 image band with the answer on it, V3 a sheet of paper on the desk, a phone
   version, and the What we do page in the same question style. Each image changes with the open
@@ -198,3 +201,11 @@ No-results state. Search answers common questions straight from the FAQs.
   #E8E0D9, light sage #C4D8C6, moss #617A67, slate #4B534D), soft desaturated grainy photos,
   frosted glass pills and round buttons, one solid white pill for the main action, light airy type,
   soft glows and gentle shadows.
+- 2026-11-11: Eli wasn't a fan of the Glass prototype. Doc update (top rule): "The story path".
+  One page, eight steps in a fixed order (problem, why it matters now, who we are, what we do, who
+  we serve, proof, price and how it works, work with us); every approved line placed once in its
+  step; the team is the hero, nothing reads as a tool, app or chatbot; "Work with us" is the only
+  button (nav and step 8), never "Start a conversation". The glass style "was close and can stay".
+- 2026-11-11: The doc (newer than the Nov 10 chat) keeps the locked pitch with "tired of keeping
+  your message straight" and shows exact prices ($24,000; $6,000 or $5,000 a month; payment terms).
+  The Story prototype follows the doc on both. Confirm with Eli.
