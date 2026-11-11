@@ -125,6 +125,9 @@ No-results state. Search answers common questions straight from the FAQs.
   grey to ink as you reach it, photos settle in as they arrive, the months step through as you
   scroll, and the questions are six stops on the tour. Artifact:
   https://claude.ai/artifact/SGekADyCf3SYqL1We9reJB
+- `docs/concepts/03-glass.html` (2026-11-11): "Glass", style prototype of the homepage. Tour
+  pacing + Mouse layouts + the reference materials. Artifact:
+  https://claude.ai/artifact/TxUXmz6AhAhQ4KMZCFc4bB
 - Same canvas, page "Round 4 · The questions" (2026-11-10): Fresh 3 developed. V1 split (questions
   left, image right), V2 image band with the answer on it, V3 a sheet of paper on the desk, a phone
   version, and the What we do page in the same question style. Each image changes with the open
@@ -190,3 +193,8 @@ No-results state. Search answers common questions straight from the FAQs.
 - Open: the doc's locked pitch still has the "tired of keeping your message straight" wording, and
   section 7 lists exact prices. Eli said in chat (Nov 10) to drop the "tired" framing and show
   "starting at" prices. Following the chat until Eli confirms.
+- 2026-11-11: Eli shared the materials reference image (not committed: third-party work, public
+  repo). Taken from it: sage and grey-green palette with warm blush highlights (sampled: blush
+  #E8E0D9, light sage #C4D8C6, moss #617A67, slate #4B534D), soft desaturated grainy photos,
+  frosted glass pills and round buttons, one solid white pill for the main action, light airy type,
+  soft glows and gentle shadows.

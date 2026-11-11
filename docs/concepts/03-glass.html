@@ -1,0 +1,349 @@
+<title>itseli Glass</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&family=Caveat:wght@500;600&display=swap">
+<style>
+/* Layout: the tour pacing (one idea, then a breath), dressed in Eli's reference materials:
+   soft sage photography, frosted glass pills and panels, one solid white pill for the main action.
+   Shapes and components follow the Mouse files: centered headlines, pill buttons, big rounded cards,
+   a phone with a chat, stacked alert cards, photo cards with a pill label. */
+:root{
+  --paper:#EEF1EC;      /* light mist, the page itself */
+  --blush:#E8E0D9;      /* warm top of the photos */
+  --mist:#C4D8C6;       /* light sage */
+  --sage:#8FA691;
+  --moss:#617A67;
+  --slate:#4B534D;      /* deep grey-green from the reference background */
+  --ink:#1E2521;
+  --muted:#56605A;
+  --glass:rgb(255 255 255 / 18%);
+  --glass-line:rgb(255 255 255 / 38%);
+  --glass-light:rgb(255 255 255 / 58%);
+  --glass-light-line:rgb(255 255 255 / 80%);
+  --shadow:0 30px 70px -36px rgb(40 58 46 / 45%);
+  --f:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --hand:"Caveat","Bradley Hand",cursive;
+  --r-panel:44px; --r-card:30px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f);font-weight:400;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+p,h1,h2,h3{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:999px}
+.wrap{max-width:1240px;margin-inline:auto}
+
+/* pills and round buttons (Mouse shapes, reference materials) */
+.pill{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:999px;font-size:16px;font-weight:400;text-decoration:none;white-space:nowrap;
+  background:var(--glass);border:1px solid var(--glass-line);color:#FFFFFF;backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);transition:background-color .25s ease,transform .25s ease}
+.pill:hover{background:rgb(255 255 255 / 28%)}
+.pill.solid{background:#FFFFFF;color:var(--ink);border-color:#FFFFFF;box-shadow:0 10px 30px -12px rgb(30 40 34 / 35%)}
+.pill.solid:hover{transform:translateY(-1px)}
+.pill.light{background:var(--glass-light);border-color:var(--glass-light-line);color:var(--ink)}
+.pill.light:hover{background:rgb(255 255 255 / 75%)}
+.pill.sm{height:40px;padding:0 16px;font-size:14px}
+.round{width:52px;height:52px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--glass-line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#FFFFFF}
+.round.light{background:var(--glass-light);border-color:var(--glass-light-line);color:var(--ink)}
+.round svg{width:20px;height:20px}
+
+/* header: floating glass pills */
+.top{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:50;padding-top:14px;
+  padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));pointer-events:none}
+.top .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.top a{pointer-events:auto}
+.top .brand{justify-self:start;font-size:19px;font-weight:500;letter-spacing:-.01em}
+.top nav{display:flex;gap:8px}
+.top .cta{justify-self:end}
+.top .pill{background:rgb(255 255 255 / 46%);border-color:rgb(255 255 255 / 70%);color:var(--ink);box-shadow:0 10px 30px -18px rgb(30 40 34 / 40%)}
+.top .pill.solid{background:#FFFFFF}
+@media (max-width:860px){.top nav{display:none}.top .wrap{grid-template-columns:1fr auto}}
+
+/* photo stand-ins with the reference treatment: soft, desaturated, sage-tinted, grainy */
+.photo{position:absolute;inset:0;overflow:hidden;container-type:inline-size;background:var(--mist)}
+.photo .scene{position:absolute;inset:-6%;filter:blur(var(--b,2px)) saturate(.55) contrast(.92) brightness(1.04)}
+.photo .scene .el{position:absolute}
+.photo::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgb(232 224 217 / 45%) 0%,rgb(196 216 198 / 25%) 45%,rgb(97 122 103 / 55%) 100%)}
+.photo::after{content:"";position:absolute;inset:0;z-index:2;opacity:.22;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.panel.tint .photo::before{background:linear-gradient(180deg,rgb(75 83 77 / 34%) 0%,rgb(75 83 77 / 50%) 50%,rgb(60 72 63 / 70%) 100%)}
+.photo .cap{position:absolute;left:16px;bottom:16px;z-index:4;max-width:calc(100% - 32px);padding:6px 12px;border-radius:999px;font-size:12px;line-height:1.3;color:#FFFFFF;background:rgb(30 40 34 / 35%);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.hand{font-family:var(--hand);color:#2C3F5E}
+
+/* panels: big rounded photo areas the tour breathes on */
+.panel{position:relative;border-radius:var(--r-panel);overflow:hidden;isolation:isolate;transform-origin:center;will-change:transform}
+.panel>.inner{position:relative;z-index:5}
+
+/* hero */
+.hero{min-height:min(96vh,940px);margin-top:12px;display:flex;align-items:flex-end}
+.hero .inner{width:100%;padding:clamp(28px,6vw,80px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px;padding-bottom:clamp(40px,8vh,96px)}
+.hero h1{font-size:clamp(44px,7.4vw,108px);line-height:.98;font-weight:300;letter-spacing:-.045em;color:#FFFFFF;max-width:13ch;text-wrap:balance;text-shadow:0 2px 40px rgb(40 58 46 / 25%)}
+.hero .cue{display:flex;align-items:center;gap:12px;color:#FFFFFF;font-size:15px}
+
+/* beats: one idea at a time */
+.beat{min-height:56vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;padding-block:8vh}
+.say{font-size:clamp(34px,5vw,68px);line-height:1.02;font-weight:300;letter-spacing:-.04em;max-width:17ch;text-wrap:balance}
+.sub{font-size:clamp(18px,1.6vw,21px);color:var(--muted);max-width:40ch;line-height:1.5;text-wrap:pretty}
+.label{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:999px;background:var(--glass-light);border:1px solid var(--glass-light-line);font-size:14px;color:var(--moss);box-shadow:0 8px 24px -16px rgb(40 58 46 / 40%)}
+.row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+
+/* gentle arrival: visible at rest, settles as it reaches you */
+.rise{opacity:.4;transform:translateY(22px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.rise.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+/* pitch card on a photo */
+.pitch{min-height:min(84vh,820px);display:flex;align-items:center;justify-content:center}
+.glasscard{background:var(--glass-light);border:1px solid var(--glass-light-line);backdrop-filter:blur(26px) saturate(1.2);-webkit-backdrop-filter:blur(26px) saturate(1.2);border-radius:var(--r-card);box-shadow:var(--shadow)}
+.pitch .glasscard{max-width:640px;margin:24px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:18px}
+.pitch .glasscard p{font-size:clamp(20px,2vw,26px);line-height:1.38;letter-spacing:-.015em}
+.who{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--muted)}
+.who .dot{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#9DB49F,#4F6B55);box-shadow:inset 0 0 0 2px rgb(255 255 255 / 60%)}
+.chip{display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:999px;background:rgb(255 255 255 / 55%);font-size:14px;color:var(--ink)}
+
+/* the phone with the sample conversation */
+.phoneband{min-height:min(110vh,1080px);display:flex;align-items:center;justify-content:center;padding-block:64px}
+.phone{position:relative;z-index:5;width:min(380px,86vw);aspect-ratio:9/19;border-radius:56px;padding:12px;background:linear-gradient(145deg,#D9DCD6,#9EA49F);box-shadow:0 50px 90px -40px rgb(20 30 24 / 60%)}
+.screen{position:relative;height:100%;border-radius:46px;overflow:hidden;background:linear-gradient(180deg,#E6E0D9 0%,#C9D6C8 55%,#8DA48F 100%);display:flex;flex-direction:column;padding:20px 18px 18px}
+.island{align-self:center;width:34%;height:28px;border-radius:20px;background:#0E1310;margin-bottom:18px}
+.screen .bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.screen .bar b{font-weight:500;font-size:16px}
+.msgs{display:flex;flex-direction:column;gap:12px;flex:1}
+.msg{max-width:88%;font-size:14.5px;line-height:1.45;padding:12px 14px;border-radius:20px}
+.msg.them{align-self:flex-end;background:rgb(255 255 255 / 70%);border:1px solid rgb(255 255 255 / 85%);border-bottom-right-radius:6px}
+.msg.us{align-self:flex-start;background:rgb(30 40 34 / 72%);color:#FFFFFF;border-bottom-left-radius:6px;backdrop-filter:blur(12px)}
+.msg.rise{transform:translateY(14px) scale(.98)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{height:32px;padding:0 12px;display:inline-flex;align-items:center;border-radius:999px;border:1px solid rgb(255 255 255 / 80%);background:rgb(255 255 255 / 35%);font-size:13px}
+.compose{margin-top:auto;height:52px;border-radius:26px;background:rgb(255 255 255 / 55%);border:1px solid rgb(255 255 255 / 80%);display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 18px;font-size:14px;color:var(--muted)}
+.compose i{width:40px;height:40px;border-radius:50%;background:#FFFFFF;display:flex;align-items:center;justify-content:center}
+.note{position:absolute;z-index:6;max-width:300px;font-size:15px;line-height:1.45;color:#FFFFFF}
+@media (max-width:860px){.note{display:none}}
+
+/* alert stack */
+.alerts{min-height:min(96vh,940px);display:flex;align-items:center;justify-content:center;padding:64px 20px}
+.stack{position:relative;z-index:5;width:min(520px,100%);height:300px}
+.alert{position:absolute;inset:0 0 auto 0;height:260px;padding:28px;border-radius:var(--r-card);display:flex;flex-direction:column;gap:14px;
+  background:rgb(255 255 255 / 62%);border:1px solid rgb(255 255 255 / 85%);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:var(--shadow);transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.alert b{font-weight:500;font-size:17px;display:flex;align-items:center;gap:10px}
+.alert b::before{content:"";width:10px;height:10px;border-radius:50%;background:#C46B4A}
+.alert p{font-size:clamp(18px,1.8vw,21px);line-height:1.42;letter-spacing:-.01em}
+.alert .act{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted)}
+.alert:nth-child(1){transform:rotate(-5deg) translate(-14px,10px)}
+.alert:nth-child(2){transform:rotate(3deg) translate(12px,4px)}
+.stack.in .alert:nth-child(1){transform:rotate(-9deg) translate(-70px,36px)}
+.stack.in .alert:nth-child(2){transform:rotate(6deg) translate(64px,18px)}
+.stack.in .alert:nth-child(3){transform:translateY(-12px)}
+@media (max-width:600px){.stack.in .alert:nth-child(1){transform:rotate(-6deg) translate(-16px,30px)}.stack.in .alert:nth-child(2){transform:rotate(4deg) translate(16px,16px)}}
+
+/* distinction: three equal glass cards */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-block:4vh 10vh}
+.three .glasscard{background:rgb(255 255 255 / 62%);padding:30px;display:flex;flex-direction:column;gap:12px;min-height:280px}
+.three h3{font-size:22px;font-weight:400;letter-spacing:-.02em}
+.three p{color:var(--muted);font-size:17px}
+.three .glasscard.mid{background:var(--slate);color:#FFFFFF;border-color:var(--slate)}
+.three .glasscard.mid p{color:#D7DED8}
+@media (max-width:860px){.three{grid-template-columns:1fr}}
+
+/* paths: photo cards with a pill label (Mouse "areas to explore") */
+.paths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-bottom:10vh}
+.pcard{position:relative;height:min(62vh,560px);border-radius:var(--r-card);overflow:hidden;isolation:isolate;text-decoration:none;color:#FFFFFF;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.pcard:hover{transform:translateY(-6px)}
+.pcard .inner{position:absolute;inset:0;z-index:5;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+.pcard h3{font-size:clamp(24px,2.3vw,30px);font-weight:300;letter-spacing:-.025em;line-height:1.12;max-width:12ch}
+.pcard .foot{display:flex;justify-content:space-between;align-items:center}
+@media (max-width:860px){.paths{grid-template-columns:1fr}.pcard{height:420px}}
+
+/* close */
+.close{min-height:min(92vh,900px);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.close .inner{max-width:760px;padding:clamp(28px,6vw,72px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;color:#FFFFFF}
+.close h2{font-size:clamp(34px,4.8vw,64px);line-height:1.02;font-weight:300;letter-spacing:-.04em;text-wrap:balance}
+.close p{font-size:clamp(18px,1.7vw,21px);color:rgb(255 255 255 / 88%)}
+footer{padding:28px 12px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:14px}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rise{opacity:1;transform:none;transition:none}
+  .panel{transform:none!important}
+  .alert{transition:none}
+  .pcard{transition:none}
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="pill brand" href="#top">itseli</a>
+    <nav aria-label="Main">
+      <a class="pill sm" href="#who-we-are">Who we are</a>
+      <a class="pill sm" href="#what-we-do">What we do</a>
+      <a class="pill sm" href="#who-we-serve">Who we serve</a>
+    </nav>
+    <a class="pill solid cta" href="#talk">Start a conversation</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+
+    <section class="panel hero tint" data-photo="stressballs" data-blur="16">
+      <div class="inner">
+        <h1>In a world of AI, the only thing you own is your message.</h1>
+        <p class="cue"><span class="round" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>Scroll slowly. We'll walk you through it.</p>
+      </div>
+    </section>
+
+    <section class="beat">
+      <p class="say rise">Making something look good isn't the same as having something worth saying.</p>
+    </section>
+
+    <section class="panel pitch" data-photo="napkin" data-blur="6">
+      <div class="inner">
+        <div class="glasscard rise">
+          <div class="who"><span class="dot" aria-hidden="true"></span>itseli <span class="chip">5 writers and designers</span></div>
+          <p>If you're the founder of a food business doing $3M+ a year, we're a small team of writers and designers who become your brand guardian. We find what you actually stand for, say it honestly, and make sure it shows up everywhere you do.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="beat">
+      <p class="say rise">It’s about time you had a DMC with your business</p>
+      <p class="sub rise d1">A new, systematic approach to brand decision-making</p>
+      <div class="row rise d2">
+        <a class="pill solid" href="#talk">Start a conversation</a>
+        <a class="pill light" href="#what-we-do">See how it works</a>
+      </div>
+    </section>
+
+    <section class="panel phoneband tint" data-photo="coffee" data-blur="18" aria-label="A sample conversation with the team">
+      <p class="note" style="left:6%;top:18%">This is what month one sounds like. Questions first.</p>
+      <div class="phone">
+        <div class="screen">
+          <span class="island" aria-hidden="true"></span>
+          <div class="bar"><span class="round light" style="width:40px;height:40px" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></span><b>itseli</b><span class="round light" style="width:40px;height:40px" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></svg></span></div>
+          <div class="msgs" id="msgs">
+            <p class="msg them rise">I'm thinking of launching a line of adaptogenic drink mixes but I’m not sure if it fits the brand</p>
+            <p class="msg us rise">Interesting move. Back when we talked about your mission, you said your whole thing was “helping stressed-out millennials build better rituals without feeling like they’re in a wellness cult.”</p>
+            <p class="msg us rise">Do these drink mixes support that mission or do they risk feeling like just another trendy product?</p>
+            <div class="chips rise" aria-hidden="true"><span>Rephrase</span><span>Show example</span><span>Skip</span></div>
+          </div>
+          <div class="compose" aria-hidden="true">Keep talking<i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E2521" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="beat">
+      <span class="label rise">You can’t scale confusion</span>
+      <p class="say rise d1">Most businesses make brand decisions in the dark</p>
+      <p class="sub rise d2">They're either guessing what “feels right,” second-guessing every move, or sitting on strategy decks they don’t know how to use</p>
+    </section>
+
+    <section class="beat" style="min-height:40vh">
+      <p class="say rise">Itseli changes that</p>
+    </section>
+
+    <section class="panel alerts" data-photo="stickies" data-blur="10" aria-label="What the team catches">
+      <div class="stack" id="stack">
+        <article class="alert"><b>Inconsistency alert</b><p>You described your audience as busy professionals, but your product requires a lot of hands-on time.</p><div class="act"><span>What the team catches</span><span class="pill light sm">Fix</span></div></article>
+        <article class="alert"><b>Inconsistency alert</b><p>Your vision talks about scaling across the country, but your story is all about staying local.</p><div class="act"><span>What the team catches</span><span class="pill light sm">Fix</span></div></article>
+        <article class="alert"><b>Inconsistency alert</b><p>Your values emphasize transparency, but your About page doesn’t mention who’s behind the brand.</p><div class="act"><span>What the team catches</span><span class="pill light sm">Fix</span></div></article>
+      </div>
+    </section>
+
+    <section class="beat">
+      <p class="say rise">99% less ‘What the hell are we doing?’ moments.</p>
+    </section>
+
+    <section class="three" aria-label="What changed, and what didn't">
+      <article class="glasscard rise"><h3>What anyone can do now</h3><p>Generate options. A decent ad, a caption, a logo that looks fine. That part keeps getting cheaper, and we won't pretend otherwise.</p></article>
+      <article class="glasscard mid rise d1"><h3>What still takes a partner</h3><p>Finding the story that's true, saying no to the flattering one, and standing behind the work until it's right.</p></article>
+      <article class="glasscard rise d2"><h3>What we do with the tools</h3><p>We use every tool that makes production faster, AI included. We don't sell you the tool. We sell you the decision and the craft.</p></article>
+    </section>
+
+    <section class="beat" style="min-height:44vh">
+      <p class="say rise">Great branding doesn’t start with Canva. It starts with Clarity.</p>
+    </section>
+
+    <section class="paths" aria-label="Where to go next">
+      <a class="pcard rise" href="#who-we-are" id="who-we-are" data-photo="stressballs2" data-blur="3"><div class="inner"><h3>What kind of partner are you?</h3><div class="foot"><span class="pill sm">Who we are</span><span class="round" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></div></div></a>
+      <a class="pcard rise d1" href="#what-we-do" id="what-we-do" data-photo="notepad" data-blur="3"><div class="inner"><h3>What actually happens in three months?</h3><div class="foot"><span class="pill sm">What we do</span><span class="round" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></div></div></a>
+      <a class="pcard rise d2" href="#who-we-serve" id="who-we-serve" data-photo="plants" data-blur="3"><div class="inner"><h3>Is this for my business?</h3><div class="foot"><span class="pill sm">Who we serve</span><span class="round" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></div></div></a>
+    </section>
+
+    <section class="panel close tint" id="talk" data-photo="coffee2" data-blur="14">
+      <div class="inner">
+        <span class="pill sm">Every engagement starts with a three-month Brand Sprint, starting at $24,000</span>
+        <h2>Stop staring at that Google Doc again. Come talk to the team.</h2>
+        <p>If that sounds like how you want to work, tell us what you're building.</p>
+        <div class="row">
+          <a class="pill solid" href="#talk">Start a conversation</a>
+          <a class="pill" href="#what-we-do">What we do</a>
+        </div>
+      </div>
+    </section>
+
+    <footer><span>itseli · Lakewood, New Jersey</span><span>Style prototype. Photos are labeled stand-ins, treated the way the real ones would be.</span></footer>
+  </div>
+</main>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- photo stand-ins: simple studio scenes, then softened like the reference ---- */
+  const ball = (l,t,w,c) => `<span class="el" style="left:${l}%;top:${t}%;width:${w}%;aspect-ratio:1;border-radius:50%;background:${c};box-shadow:inset -1.6cqw -2cqw 3.6cqw rgb(0 0 0 / 18%),0 2.4cqw 3.6cqw -1.4cqw rgb(70 40 20 / 40%)"></span>`;
+  const note = (l,t,c,r,txt) => `<span class="el hand" style="left:${l}%;top:${t}%;width:24%;aspect-ratio:1;background:${c};transform:rotate(${r}deg);box-shadow:0 1.4cqw 2.2cqw -1.2cqw rgb(0 0 0 / 30%);padding:1.6cqw;font-size:3.1cqw;line-height:1.05;color:#2A2A2A">${txt}</span>`;
+  const leaf = (l,t,w,h,c,r) => `<span class="el" style="left:${l}%;top:${t}%;width:${w}%;height:${h}%;border-radius:50%;background:${c};transform:rotate(${r}deg)"></span>`;
+  const cup = (cx,cy,s) => `
+    <span class="el" style="left:${cx}%;top:${cy}%;width:${s}%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#F4F1EC;box-shadow:0 3cqw 5cqw -2.4cqw rgb(60 40 20 / 45%)"></span>
+    <span class="el" style="left:${cx}%;top:${cy}%;width:${s*.72}%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#FFFFFF"></span>
+    <span class="el" style="left:${cx}%;top:${cy}%;width:${s*.6}%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#5E3F2C;border:1cqw solid #9C6B47"></span>`;
+  const S = {
+    stressballs:{bg:'#D9D3C9',cap:'a pile of stress balls on the studio desk',html:ball(4,30,24,'#E8613C')+ball(24,6,20,'#F2C14E')+ball(25,44,27,'#6C9BD2')+ball(46,20,22,'#7FB77E')+ball(50,56,19,'#E58FB1')+ball(66,34,18,'#F2C14E')+ball(78,8,16,'#7FB77E')+ball(80,58,17,'#6C9BD2')},
+    stressballs2:{bg:'#D7DCD3',cap:'one stress ball in an open hand',html:`<span class="el" style="left:16%;top:34%;width:70%;height:76%;border-radius:45% 45% 0 0;background:#E2B99B"></span>`+ball(32,14,40,'#E8613C')},
+    napkin:{bg:'#CDBFAE',cap:'a napkin doodle on a cafe table',html:`<span class="el hand" style="left:26%;top:10%;width:46%;aspect-ratio:1;background:#FBF9F4;transform:rotate(-5deg);box-shadow:0 2cqw 3.6cqw -1.8cqw rgb(60 40 20 / 40%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1cqw"><span style="font-size:5.2cqw;line-height:1">looks good</span><span style="font-size:3.2cqw">≠</span><span style="font-size:5.2cqw;line-height:1;text-decoration:underline wavy #2C3F5E;text-underline-offset:1cqw">worth saying</span></span>`},
+    coffee:{bg:'#D6CBBD',cap:'coffee from above on the meeting table',html:cup(64,50,34)+`<span class="el" style="left:8%;top:14%;width:26%;height:72%;background:#FCFBF7;transform:rotate(-4deg)"></span>`},
+    coffee2:{bg:'#D2C6B6',cap:'two coffees mid-conversation',html:cup(32,52,28)+cup(68,46,28)+note(43,10,'#F6E27A',-6,'message first')},
+    stickies:{bg:'#D6D1C7',cap:'sticky notes on the wall from a message session',html:note(6,8,'#F6E27A',-4,'who is this for?')+note(38,4,'#F4A7B9',3,"what's actually true?")+note(70,10,'#F7B267',-2,'too many words')+note(11,54,'#A9CCE3',2,'month 1: the message')+note(42,52,'#F6E27A',-3,'month 2: the look')+note(72,56,'#F4A7B9',4,'month 3: hand it off')},
+    notepad:{bg:'#D3CCC0',cap:'a ruled notepad with handwritten notes',html:`<span class="el hand" style="left:16%;top:8%;width:62%;height:90%;background-color:#FCFBF7;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 5cqw,#C9D6E8 5cqw,#C9D6E8 calc(5cqw + 1px));transform:rotate(3deg);border-left:2px solid #E3A1A1;padding:6cqw 4cqw 0 6cqw;font-size:5cqw;line-height:5cqw"><span style="display:block">month 1</span><span style="display:block">month 2</span><span style="display:block">month 3</span><span style="display:block;text-decoration:line-through">logo first</span></span>`},
+    plants:{bg:'#D5DDD2',cap:'a studio plant in morning light',html:leaf(30,8,16,40,'#6E8B5E',-28)+leaf(44,2,15,44,'#4F6B45',6)+leaf(54,10,16,38,'#8FAE7A',32)+leaf(22,30,15,30,'#8FAE7A',-52)+leaf(60,30,15,30,'#6E8B5E',56)+`<span class="el" style="left:34%;top:62%;width:32%;height:36%;border-radius:2cqw;background:#CFC9BF"></span>`}
+  };
+  document.querySelectorAll('[data-photo]').forEach(el => {
+    const s = S[el.dataset.photo] || S.stressballs;
+    const ph = document.createElement('div');
+    ph.className = 'photo';
+    ph.setAttribute('role','img');
+    ph.setAttribute('aria-label','Placeholder for a photo: ' + s.cap);
+    ph.style.setProperty('--b', (el.dataset.blur || 2) + 'px');
+    ph.innerHTML = `<div class="scene" style="background:${s.bg}">${s.html}</div><span class="cap">Photo to shoot: ${s.cap}</span>`;
+    el.prepend(ph);
+  });
+
+  if (reduce) { document.querySelectorAll('.rise').forEach(e => e.classList.add('in')); document.getElementById('stack').classList.add('in'); return; }
+
+  /* ---- arrivals: each piece settles as it reaches the middle of the screen ---- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); else if (e.boundingClientRect.top > 0) e.target.classList.remove('in'); }), { rootMargin: '0px 0px -16% 0px' });
+  document.querySelectorAll('.rise, #stack').forEach(el => io.observe(el));
+
+  /* ---- chat messages arrive one at a time ---- */
+  const msgs = [...document.querySelectorAll('#msgs .rise')];
+  msgs.forEach((m,i) => m.style.transitionDelay = (i * .45) + 's');
+
+  /* ---- panels breathe in as they arrive ---- */
+  const panels = [...document.querySelectorAll('.panel:not(.hero)')];
+  const frame = () => {
+    const vh = innerHeight;
+    for (const p of panels) {
+      const r = p.getBoundingClientRect();
+      const t = Math.max(0, Math.min(1, (vh - r.top) / (vh * .8)));
+      p.style.transform = `scale(${.92 + .08 * t})`;
+    }
+  };
+  let tick = false;
+  addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(() => { frame(); tick = false; }); } }, { passive: true });
+  addEventListener('resize', frame);
+  frame();
+})();
+</script>
