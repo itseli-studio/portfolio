@@ -5,8 +5,9 @@ Work happens across multiple Claude Code cloud sessions and devices, so this rep
 single source of truth. Anything not committed and pushed is lost when a session ends.
 
 ## Status
-- Phase: **design exploration**. Eli picked the search-first "Spotlight" direction (hero B).
-  Explorations live on the design canvas linked in `docs/brief.md`. Nothing has been built yet.
+- Phase: **design exploration**. Direction as of 2026-11-11: a product/app-style website (see the
+  "Notes for Claude" tab in Eli's Studio Website Brief doc). Explorations are listed in
+  `docs/brief.md`. Nothing has been built yet.
 - Do not start building the site until the owner says so.
 
 ## Skills to use (Eli's instruction, 2026-11-10)
@@ -25,7 +26,10 @@ Design specs from brainstorming go in `docs/superpowers/specs/`, plans in `docs/
 
 ## Working rules
 - Take no design inspiration from Eli's other Claude projects (itseli OS, its client portal,
-  itseli finances, Tribal website prototype). Design this site on its own terms.
+  itseli finances, Tribal website prototype). Exception, per Eli's doc (2026-11-10): take layout,
+  button shapes, pill buttons, rounded corners, card sizes and spacing from Eli's **Mouse** Figma
+  files (landing page and app; links are in the doc's Notes tab). Never Mouse's colors.
+- The doc has a **"Notes for Claude" tab**. Read it every session along with the main tab.
 - **Source of truth for strategy, voice, structure and copy: Eli's Google Doc titled "Studio
   Website Brief"** (find it by searching Eli's Google Drive for that title; the link is kept out of
   this public repo on purpose). Eli keeps editing it. Re-read it at the start of every session and

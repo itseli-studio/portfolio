@@ -174,3 +174,19 @@ No-results state. Search answers common questions straight from the FAQs.
 - 2026-11-10: Round 4 layouts rejected: too much crammed into the first screen. The site should read
   like a scripted, guided tour: small chunks of text, then a visual to breathe on, then the next
   chunk, with scroll effects and animation guiding people through the message.
+- 2026-11-11: Eli didn't like the tour's visual style (pacing kept). New direction from the doc's
+  "Notes for Claude" tab (Nov 10):
+  - Product/app-style website. Still a website: no accounts, logins or chatbot. A free tool and a
+    client waitlist are parked.
+  - Layout from Eli's Mouse Figma files: centered big headlines, pill buttons, large rounded cards,
+    phone-screen mockups, "is / is not" cards, card stacks, chat bubbles, alert cards, photo topic
+    cards with pill labels. Not Mouse's black background or lime green.
+  - Materials from a reference image Eli has (still to receive): soft light UI, sage and grey-green
+    palette, frosted glass panels and pill buttons, blurred photo backgrounds, soft glows, gentle
+    shadows. Mobile first.
+  - Eli's Mouse landing copy is approved verbatim (Mouse renamed to Itseli or the team), placed
+    under the locked hero and pitch. Jokey lines, made-up stats and the therapy line are allowed.
+  - Not now: clarity scores or any numbers/percentages, the free tool, accounts, chatbot, waitlist.
+- Open: the doc's locked pitch still has the "tired of keeping your message straight" wording, and
+  section 7 lists exact prices. Eli said in chat (Nov 10) to drop the "tired" framing and show
+  "starting at" prices. Following the chat until Eli confirms.
