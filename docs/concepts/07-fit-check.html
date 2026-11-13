@@ -24,10 +24,6 @@ h1,h2,p,ul{margin:0}
 
 .stage{height:100%;display:flex;flex-direction:column;align-items:center;gap:12px;
   padding:max(12px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
-.proto{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--grey);flex-wrap:wrap;justify-content:center}
-.proto .seg{display:flex;gap:3px;padding:3px;border-radius:999px;background:var(--white);border:1px solid var(--line)}
-.proto .seg button{border:0;background:transparent;height:30px;padding:0 12px;border-radius:999px;font-size:12px;cursor:pointer}
-.proto .seg button[aria-pressed="true"]{background:var(--ink);color:#FFFFFF}
 .app{flex:1;min-height:0;width:100%;max-width:1180px;background:var(--white);border-radius:32px;overflow:hidden;box-shadow:0 30px 70px -40px rgb(0 0 0 / 35%);display:flex;flex-direction:column}
 @media (max-width:560px){.app{border-radius:24px}}
 
@@ -97,7 +93,8 @@ h1,h2,p,ul{margin:0}
 .form{display:flex;flex-direction:column;gap:10px}
 .form label{font-size:13px;font-weight:600;color:var(--grey)}
 .form input{height:50px;border-radius:14px;border:0;background:var(--soft);padding:0 14px;font-size:16px;width:100%}
-.form input:focus{outline:2px solid var(--blue);outline-offset:1px}
+.form textarea{border-radius:14px;border:0;background:var(--soft);padding:12px 14px;font-size:16px;width:100%;min-height:96px;resize:vertical}
+.form textarea:focus,.form input:focus{outline:2px solid var(--blue);outline-offset:1px}
 .form .f{display:flex;flex-direction:column;gap:6px}
 .sent{border-radius:16px;background:#E9FBF2;color:#14613F;padding:14px 16px;font-size:15px}
 .draft{font-size:12px;color:var(--grey);text-align:center}
@@ -105,13 +102,6 @@ h1,h2,p,ul{margin:0}
 </style>
 
 <div class="stage">
-  <div class="proto" aria-label="Prototype controls">
-    <span>If an answer doesn't fit:</span>
-    <div class="seg" role="group" aria-label="Mismatch behavior">
-      <button data-act="mode" data-v="keep" aria-pressed="true">Keep going, show at the end</button>
-      <button data-act="mode" data-v="stop" aria-pressed="false">Stop early</button>
-    </div>
-  </div>
   <div class="app" id="app"></div>
 </div>
 
@@ -209,7 +199,7 @@ h1,h2,p,ul{margin:0}
   ];
 
   /* ---------- state ---------- */
-  const st = { view:'home', i:0, mode:'keep', ans:{}, sent:false, seen:new Set() };
+  const st = { view:'home', i:0, ans:{}, sent:false, noteSent:false, seen:new Set() };
   Q.forEach(q => st.ans[q.id] = q.type === 'one' ? null : q.opts.map(()=>false));
 
   const answered = q => q.type === 'one' ? st.ans[q.id] !== null : q.type === 'many' ? st.ans[q.id].some(Boolean) : true;
@@ -253,7 +243,7 @@ h1,h2,p,ul{margin:0}
           ${q.opts.map((o,k)=>`<button class="opt ${q.type==='one'?'':'box'}" data-act="ans" data-k="${k}" ${q.type==='one'?'role="radio"':'role="checkbox"'} ${role}="${!!isOn(k)}">
             <span class="mk" aria-hidden="true">${isOn(k)?'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>':''}</span>
             <span class="t"><span>${o[0]}</span>${o[1]?`<small>${o[1]}</small>`:''}</span></button>`).join('')}
-          ${showNo ? `<p class="reply no">${q.no}${st.mode==='keep' ? " You can keep going, and we'll show you where things stand at the end." : ''}</p>` : ''}
+          ${showNo ? `<p class="reply no">${q.no} You can keep going, and we'll show you where things stand at the end.</p>` : ''}
           ${okMsg ? `<p class="reply ok">${okMsg}</p>` : ''}
         </div>
         <div class="foot">
@@ -288,9 +278,17 @@ h1,h2,p,ul{margin:0}
         <h2>We might not be the right fit right now.</h2>
         <p class="lead">That's not a bad thing. Here's where things didn't line up:</p>
         <ul class="miss">${m.map(q=>`<li>${q.no}</li>`).join('')}</ul>
-        <p class="lead">If something changes, come back any time.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn ghost" data-act="review">Review my answers</button><button class="btn ghost" data-act="home">Back to home</button></div>
-        <p class="draft">Open question for Eli: should someone who doesn't fit still be able to send a note?</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn ghost" data-act="review">Review my answers</button></div>
+        <h3 style="margin:10px 0 0;font-size:20px;font-weight:800;letter-spacing:-.02em">Still want to reach out? Send us a note.</h3>
+        <p class="lead" style="margin-top:-8px">We read every one. Your answers come with it, so you don't have to explain twice.</p>
+        ${st.noteSent ? `<p class="sent">Thanks. Your note and your answers are with the team. (Prototype: nothing was sent.)</p>` : `
+        <form class="form" id="note" novalidate>
+          <div class="f"><label for="n-name">Your name</label><input id="n-name" autocomplete="name" placeholder="Jane Cohen"></div>
+          <div class="f"><label for="n-biz">Business</label><input id="n-biz" autocomplete="organization" placeholder="The name customers know you by"></div>
+          <div class="f"><label for="n-email">Email</label><input id="n-email" type="email" autocomplete="email" placeholder="you@yourbusiness.com"></div>
+          <div class="f"><label for="n-msg">Your note</label><textarea id="n-msg" placeholder="Anything you'd like us to know"></textarea></div>
+          <button class="btn" type="submit" style="align-self:flex-start">Send note ${arrow}</button>
+        </form>`}
       </section>`;
   }
 
@@ -298,15 +296,13 @@ h1,h2,p,ul{margin:0}
   const app = document.getElementById('app');
   function render(focusSel){
     app.innerHTML = st.view === 'home' ? home() : st.view === 'q' ? question() : result();
-    document.querySelectorAll('[data-act="mode"]').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === st.mode));
     const el = focusSel ? app.querySelector(focusSel) : app.querySelector('h1, h2');
     if (el) { if (!el.hasAttribute('tabindex') && !/BUTTON|INPUT/.test(el.tagName)) el.setAttribute('tabindex','-1'); el.focus({ preventScroll:true }); }
   }
   document.addEventListener('click', e => {
     const b = e.target.closest('[data-act]'); if (!b || b.disabled) return;
     const a = b.dataset.act;
-    if (a === 'mode') { st.mode = b.dataset.v; render(); }
-    else if (a === 'home') { st.view = 'home'; render(); }
+    if (a === 'home') { st.view = 'home'; render(); }
     else if (a === 'start') { st.view = 'q'; render(); }
     else if (a === 'review') { st.view = 'q'; st.i = 0; render(); }
     else if (a === 'back') { if (st.i === 0) st.view = 'home'; else st.i--; render(); }
@@ -314,7 +310,6 @@ h1,h2,p,ul{margin:0}
       const q = Q[st.i];
       if (!answered(q)) return;
       st.seen.add(q.id);
-      if (st.mode === 'stop' && misfit(q)) { st.view = 'res'; render(); return; }
       if (st.i < Q.length - 1) st.i++; else st.view = 'res';
       render();
     }
@@ -324,7 +319,10 @@ h1,h2,p,ul{margin:0}
       render(`[data-act="ans"][data-k="${k}"]`);
     }
   });
-  document.addEventListener('submit', e => { if (e.target.id === 'contact') { e.preventDefault(); st.sent = true; render(); } });
+  document.addEventListener('submit', e => {
+    if (e.target.id === 'contact') { e.preventDefault(); st.sent = true; render(); }
+    if (e.target.id === 'note') { e.preventDefault(); st.noteSent = true; render(); }
+  });
   render();
 })();
 </script>
