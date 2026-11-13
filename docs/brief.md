@@ -139,6 +139,11 @@ No-results state. Search answers common questions straight from the FAQs.
   2 Clean (white, bold flat blue drawings, black pills), 3 Glow (grainy warm gradient, frosted answer
   pills that reply when chosen). Drawings are simple originals, placeholders for real illustration.
   Artifact: https://claude.ai/artifact/FVEZCNAD6fXVt6y9yhpEqP
+- `docs/concepts/07-fit-check.html` (2026-11-13): Style 2 (Clean) home with "Let's get started" and a
+  ten-question fit check (about you, what you need, beliefs, how we work, budget, terms). Tap answers
+  and tick boxes; mismatches get a kind inline note; ends in "We're aligned" plus contact details, or
+  an honest "not the right fit right now" with reasons. Toggle: keep going vs stop early on a
+  mismatch. Artifact: https://claude.ai/artifact/6Hvkr98dESwDbN4XpRgaEP
 - Same canvas, page "Round 4 · The questions" (2026-11-10): Fresh 3 developed. V1 split (questions
   left, image right), V2 image band with the answer on it, V3 a sheet of paper on the desk, a phone
   version, and the What we do page in the same question style. Each image changes with the open
@@ -230,3 +235,9 @@ No-results state. Search answers common questions straight from the FAQs.
 - 2026-11-13: Eli shared three onboarding style references (not committed: third-party work, public
   repo) to explore: pastel step screens with single-color character line art; clean white screens
   with bold flat blue illustrations and black pills; a grainy warm gradient with frosted answer pills.
+- 2026-11-13: Eli picked Style 2 (Clean) for onboarding. Direction: a clean home page with a "Let's
+  get started" button leading to a fit check (philosophy, timeline, budget, terms, what they need)
+  using multiple choice and checkboxes. A lead who reaches the end aligned is a vetted client.
+  Draft fit rules (for Eli to confirm): food business; $3M+ a year; agrees with every belief
+  statement; accepts message first, no design in month one; no start within two weeks; can reply in
+  3 to 5 business days with one person signing off; $24,000 sprint in range; agrees to the terms.
