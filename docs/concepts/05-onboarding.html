@@ -1,0 +1,455 @@
+<title>itseli Onboarding</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&display=swap">
+<style>
+/* Layout: one fixed full-screen view, no page scrolling. The six onboarding steps open from buttons around
+   the edges. Three shells for the same steps: A Desk (rail, panel, live summary), B Cards (one card at a time,
+   bottom dock), C Timeline (the sprint timeline is the backbone, steps float above it). Materials: sage, glass. */
+:root{
+  --paper:#EEF1EC; --mist:#C4D8C6; --sage:#8FA691; --moss:#617A67; --slate:#4B534D;
+  --ink:#1E2521; --muted:#56605A; --line:rgb(30 37 33 / 12%);
+  --glass:rgb(255 255 255 / 20%); --glass-line:rgb(255 255 255 / 42%);
+  --card:rgb(255 255 255 / 72%); --card-line:rgb(255 255 255 / 90%);
+  --shadow:0 30px 70px -36px rgb(30 45 35 / 50%);
+  --f:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;overflow:hidden;background:var(--slate);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid #FFFFFF;outline-offset:3px;border-radius:12px}
+.card :focus-visible{outline-color:var(--ink)}
+h2,h3,p,ul,ol{margin:0}
+
+/* the stage: full screen, soft sage photo behind everything */
+.stage{position:relative;height:100%;overflow:hidden;
+  padding:max(14px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(14px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.bg{position:absolute;inset:0;z-index:0;overflow:hidden;background:#C9CFC6}
+.bg i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.85}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgb(232 224 217 / 55%) 0%,rgb(196 216 198 / 30%) 45%,rgb(75 90 80 / 70%) 100%)}
+.bg::before{content:"";position:absolute;inset:0;z-index:1;opacity:.25;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.cap{position:absolute;left:16px;bottom:max(14px,env(safe-area-inset-bottom,0px));z-index:2;font-size:11px;color:rgb(255 255 255 / 80%)}
+.ui{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;gap:12px}
+
+/* shared parts */
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:46px;padding:0 20px;border-radius:999px;border:1px solid var(--glass-line);background:var(--glass);color:#FFFFFF;backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);cursor:pointer;white-space:nowrap;font-size:15px;text-decoration:none;transition:background-color .2s ease,opacity .2s ease}
+.pill:hover{background:rgb(255 255 255 / 30%)}
+.pill.solid{background:#FFFFFF;color:var(--ink);border-color:#FFFFFF;box-shadow:0 10px 30px -12px rgb(20 30 24 / 40%)}
+.pill.dark{background:var(--ink);color:#FFFFFF;border-color:var(--ink)}
+.pill.light{background:rgb(255 255 255 / 55%);border-color:rgb(255 255 255 / 85%);color:var(--ink)}
+.pill.sm{height:36px;padding:0 14px;font-size:13px}
+.pill[disabled]{opacity:.45;cursor:not-allowed}
+.round{width:46px;height:46px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--glass-line);background:var(--glass);color:#FFFFFF;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);cursor:pointer;flex:none}
+.round svg,.pill svg{width:18px;height:18px}
+.round[disabled]{opacity:.35;cursor:not-allowed}
+.card{background:var(--card);border:1px solid var(--card-line);border-radius:28px;backdrop-filter:blur(28px) saturate(1.2);-webkit-backdrop-filter:blur(28px) saturate(1.2);box-shadow:var(--shadow);color:var(--ink)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{font-weight:500;font-size:17px}
+.switch{display:flex;gap:4px;padding:4px;border-radius:999px;background:rgb(30 37 33 / 30%);border:1px solid rgb(255 255 255 / 25%);backdrop-filter:blur(14px)}
+.switch button{border:0;background:transparent;color:#FFFFFF;height:34px;padding:0 14px;border-radius:999px;font-size:13px;cursor:pointer}
+.switch button[aria-pressed="true"]{background:#FFFFFF;color:var(--ink)}
+.switch .lab{color:rgb(255 255 255 / 75%);font-size:12px;padding:0 6px 0 10px;align-self:center}
+@media (max-width:640px){.switch .lab{display:none}.switch button{padding:0 10px}}
+
+/* step content (shared by all three shells) */
+.step{display:flex;flex-direction:column;gap:18px;min-height:0}
+.step h2{font-size:clamp(26px,3vw,38px);font-weight:300;letter-spacing:-.03em;line-height:1.08;text-wrap:balance}
+.step .lead{color:var(--muted);font-size:16px;max-width:56ch}
+.kick{font-size:13px;color:var(--moss)}
+.months{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.months .m{padding:16px;border-radius:20px;background:rgb(255 255 255 / 60%);border:1px solid rgb(255 255 255 / 90%)}
+.months .m small{color:var(--moss);font-size:13px}
+.months .m b{display:block;font-weight:500;font-size:17px;margin:2px 0 4px}
+.months .m span{color:var(--muted);font-size:14px}
+.months .m.opt{background:transparent;border:1px dashed rgb(30 37 33 / 25%)}
+@media (max-width:640px){.months{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:44px;padding:0 16px;border-radius:999px;border:1px solid rgb(30 37 33 / 16%);background:rgb(255 255 255 / 55%);cursor:pointer;font-size:15px}
+.chip[aria-pressed="true"]{background:var(--ink);color:#FFFFFF;border-color:var(--ink)}
+.rows{display:flex;flex-direction:column}
+.rows .r{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:11px 0;border-top:1px solid var(--line);font-size:15px}
+.rows .r:first-child{border-top:0}
+.rows .r span:last-child{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.note{font-size:13px;color:var(--muted)}
+.flag{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#7A5B2E;background:rgb(255 236 200 / 70%);border:1px solid rgb(240 210 150 / 90%);padding:6px 12px;border-radius:999px;align-self:flex-start}
+.believe{display:flex;flex-direction:column;gap:10px}
+.believe label{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:20px;background:rgb(255 255 255 / 60%);border:1px solid rgb(255 255 255 / 90%);cursor:pointer;font-size:clamp(17px,1.6vw,20px);line-height:1.35;letter-spacing:-.01em}
+.believe input{appearance:none;-webkit-appearance:none;width:24px;height:24px;flex:none;margin-top:2px;border-radius:8px;border:1.5px solid var(--moss);background:#FFFFFF;cursor:pointer;display:grid;place-items:center}
+.believe input:checked{background:var(--moss)}
+.believe input:checked::after{content:"";width:6px;height:11px;border:solid #FFFFFF;border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-1px)}
+.believe .more{border:1px dashed rgb(30 37 33 / 25%);background:transparent;color:var(--muted);font-size:14px;cursor:default}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.plan{text-align:left;padding:14px 16px;border-radius:20px;border:1px solid rgb(30 37 33 / 14%);background:rgb(255 255 255 / 55%);cursor:pointer}
+.plan b{display:block;font-weight:500}
+.plan span{color:var(--muted);font-size:14px}
+.plan[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);background:#FFFFFF}
+@media (max-width:640px){.plans{grid-template-columns:1fr}}
+.terms{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;font-size:14px;color:var(--muted)}
+.terms li{list-style:none;padding:8px 0;border-top:1px solid var(--line)}
+.terms{padding:0}
+@media (max-width:640px){.terms{grid-template-columns:1fr}}
+.sign{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sign input{flex:1;min-width:200px;height:46px;border-radius:999px;border:1px solid rgb(30 37 33 / 18%);background:#FFFFFF;padding:0 18px;font-size:16px}
+.sign input:focus{outline:2px solid var(--moss);outline-offset:1px}
+.signed{font-size:15px;color:var(--moss)}
+.invoice{border-radius:22px;background:#FFFFFF;border:1px solid rgb(30 37 33 / 10%);padding:20px;display:flex;flex-direction:column;gap:12px}
+.invoice .ih{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.invoice .ih b{font-weight:500}
+.invoice .tot{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;border-top:1px solid var(--line)}
+.invoice .tot span:last-child{font-size:28px;font-weight:300;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.sched{display:flex;flex-direction:column;position:relative;padding-left:22px}
+.sched::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:1.5px;background:rgb(30 37 33 / 18%)}
+.sched li{list-style:none;position:relative;display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:15px}
+.sched li::before{content:"";position:absolute;left:-21px;top:14px;width:11px;height:11px;border-radius:50%;background:#FFFFFF;border:1.5px solid var(--moss)}
+.sched li.big::before{background:var(--moss)}
+.sched li.pay::before{border-color:#B9884B;background:#F6E3C3}
+.sched li span:last-child{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.sched{padding-top:0;margin:0}
+.done-msg{display:flex;flex-direction:column;gap:10px}
+
+/* ---------- Shell A: the desk ---------- */
+.desk{flex:1;min-height:0;display:grid;grid-template-columns:250px minmax(0,1fr) 290px;gap:12px}
+.rail{padding:16px;display:flex;flex-direction:column;gap:4px}
+.rail h3,.summary h3{font-size:13px;font-weight:400;color:var(--muted);padding:4px 8px 8px}
+.rail button{display:flex;align-items:center;gap:12px;height:52px;padding:0 10px;border:0;border-radius:16px;background:transparent;text-align:left;cursor:pointer;font-size:15px;color:var(--ink)}
+.rail button:hover{background:rgb(255 255 255 / 50%)}
+.rail button[aria-current="step"]{background:#FFFFFF;box-shadow:0 8px 20px -14px rgb(20 30 24 / 50%)}
+.rail button[disabled]{opacity:.45;cursor:not-allowed}
+.dot{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--moss);font-size:12px;color:var(--moss);flex:none;font-variant-numeric:tabular-nums}
+.dot.ok{background:var(--moss);color:#FFFFFF}
+.main{display:flex;flex-direction:column;min-height:0;padding:clamp(20px,3vw,36px)}
+.main .scroll{flex:1;min-height:0;overflow:auto;padding-right:4px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:14px}
+.summary{padding:16px;display:flex;flex-direction:column;gap:6px;overflow:auto}
+.summary .rows{padding:0 8px}
+.summary .help{margin-top:auto;padding:14px;border-radius:20px;background:rgb(255 255 255 / 55%);font-size:14px;color:var(--muted)}
+@media (max-width:1100px){.desk{grid-template-columns:220px minmax(0,1fr)}.summary{display:none}}
+@media (max-width:760px){.desk{grid-template-columns:1fr}.rail{flex-direction:row;overflow-x:auto;padding:8px;gap:4px}.rail h3{display:none}.rail button{flex:none;height:44px}.rail button .t{display:none}}
+
+/* ---------- Shell B: cards ---------- */
+.cards{flex:1;min-height:0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px}
+.cards .card{width:min(620px,100%);margin:0 auto;max-height:100%;display:flex;flex-direction:column;padding:clamp(22px,3vw,34px)}
+.cards .scroll{overflow:auto;min-height:0}
+.progress{display:flex;gap:6px;justify-content:center;margin-bottom:6px}
+.progress i{height:4px;width:44px;border-radius:4px;background:rgb(30 37 33 / 15%)}
+.progress i.on{background:var(--ink)}
+.dock{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
+.dock .round.on{background:#FFFFFF;color:var(--ink);border-color:#FFFFFF}
+.go{display:inline-flex;align-items:center;gap:14px;height:60px;padding:0 6px 0 26px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-line);color:#FFFFFF;backdrop-filter:blur(18px);font-size:17px;cursor:pointer}
+.go i{width:48px;height:48px;border-radius:50%;background:#FFFFFF;color:var(--ink);display:grid;place-items:center;box-shadow:0 0 30px rgb(255 255 255 / 50%)}
+.go[disabled]{opacity:.45;cursor:not-allowed}
+@media (max-width:760px){.cards{grid-template-columns:1fr}.cards>.round{display:none}.dock .round{width:40px;height:40px}}
+
+/* ---------- Shell C: timeline ---------- */
+.tl{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px}
+.tl .steps{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.tl .steps .pill[aria-current="step"]{background:#FFFFFF;color:var(--ink);border-color:#FFFFFF}
+.tl .float{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start}
+.tl .float .card{max-height:100%;overflow:auto;padding:clamp(20px,3vw,32px);width:min(720px,100%);justify-self:center}
+.side{width:300px;max-height:100%;overflow:auto;padding:16px}
+.side h3{font-size:13px;font-weight:400;color:var(--muted);padding:0 4px 8px}
+.track{padding:18px 22px 20px;border-radius:28px;background:rgb(30 37 33 / 28%);border:1px solid rgb(255 255 255 / 25%);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#FFFFFF}
+.track .bar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg{position:relative;padding:12px 14px;border-radius:18px;background:rgb(255 255 255 / 14%);border:1px solid rgb(255 255 255 / 25%);min-height:78px;transition:background-color .4s ease}
+.seg small{font-size:12px;opacity:.85}
+.seg b{display:block;font-weight:400;font-size:16px}
+.seg span{font-size:12px;opacity:.85;font-variant-numeric:tabular-nums}
+.seg.hot{background:rgb(255 255 255 / 85%);color:var(--ink)}
+.seg.opt{border-style:dashed;background:transparent}
+.track .meta{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px;font-size:13px;opacity:.9}
+@media (max-width:1000px){.side{display:none}.tl .float{grid-template-columns:1fr}}
+@media (max-width:900px){.top .steps{order:3;width:100%;flex-wrap:nowrap!important;justify-content:flex-start!important;overflow-x:auto;scrollbar-width:none}.top .steps .pill{flex:none}}
+@media (max-width:640px){.track .bar{grid-template-columns:1fr 1fr}.seg{min-height:0}.track{padding:12px}}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="stage">
+  <div class="bg" aria-hidden="true">
+    <i style="width:46vw;height:46vw;left:-6vw;top:8vh;background:#C7A596"></i>
+    <i style="width:38vw;height:38vw;left:30vw;top:-10vh;background:#D6CBA6"></i>
+    <i style="width:44vw;height:44vw;left:52vw;top:30vh;background:#98ABB2"></i>
+    <i style="width:36vw;height:36vw;left:18vw;top:52vh;background:#94AF95"></i>
+  </div>
+  <span class="cap">Background stand-in: a soft, out-of-focus studio photo</span>
+  <div class="ui" id="ui"></div>
+</div>
+
+<script>
+(() => {
+  /* ---------------- data from the Studio Website Brief ---------------- */
+  const STEPS = [
+    { id:'process',  name:'The process',  icon:'M4 6h16M4 12h10M4 18h7' },
+    { id:'timeline', name:'Timeline',     icon:'M7 3v4M17 3v4M4 9h16M5 5h14v15H5z' },
+    { id:'believe',  name:'What we believe', icon:'M5 12l4 4 10-10' },
+    { id:'contract', name:'Agreement',    icon:'M6 3h9l4 4v14H6zM9 12h7M9 16h5' },
+    { id:'invoice',  name:'Invoice',      icon:'M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2zM9 8h6M9 12h6' },
+    { id:'schedule', name:'Your schedule', icon:'M12 7v5l3 2M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z' }
+  ];
+  const BELIEFS = [
+    "As the founder, you can't build two successful brands at once.",
+    "The right eyeballs over the number of eyeballs."
+  ];
+
+  /* ---------------- state ---------------- */
+  const st = { shell:'A', step:0, start:null, plan:'monthly', agree:BELIEFS.map(()=>false), name:'', signed:false, panel:false };
+  try { const s = localStorage.getItem('itseli-onb-shell'); if (s) st.shell = s; } catch(e) {}
+
+  /* ---------------- dates ---------------- */
+  const today = new Date(); today.setHours(0,0,0,0);
+  const mondays = (() => { const d = new Date(today); d.setDate(d.getDate() + 14); while (d.getDay() !== 1) d.setDate(d.getDate()+1); return [0,7,14,21].map(n => { const x = new Date(d); x.setDate(x.getDate()+n); return x; }); })();
+  const addMonths = (d,n) => { const x = new Date(d); x.setMonth(x.getMonth()+n); return x; };
+  const fmt = d => d ? d.toLocaleDateString('en-US',{ weekday:'short', month:'short', day:'numeric' }) : 'Pick a start date';
+  const fmtShort = d => d ? d.toLocaleDateString('en-US',{ month:'short', day:'numeric' }) : '-';
+  const money = n => '$' + n.toLocaleString('en-US');
+  const sprint = () => {
+    const s = st.start;
+    if (!s) return null;
+    return { m1:s, m2:addMonths(s,1), m3:addMonths(s,2), end:addMonths(s,3) };
+  };
+
+  /* ---------------- gates ---------------- */
+  const allAgreed = () => st.agree.every(Boolean);
+  const canLeave = i => {
+    if (i === 1) return !!st.start;
+    if (i === 2) return allAgreed();
+    if (i === 3) return st.signed;
+    return true;
+  };
+  const reachable = i => { for (let j = 0; j < i; j++) if (!canLeave(j)) return false; return true; };
+  const done = i => i < st.step && canLeave(i);
+
+  /* ---------------- step content ---------------- */
+  const icon = p => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p}"/></svg>`;
+  const firstAmount = () => st.plan === 'monthly' ? 8000 : 12000;
+
+  function stepHTML(i){
+    const s = sprint();
+    if (i === 0) return `
+      <div class="step">
+        <span class="kick">Step 1 of 6</span>
+        <h2>Here's how every engagement runs</h2>
+        <p class="lead">Every engagement starts with the 3-Month Brand Sprint. The months are a guide to the order of the work. Each step starts once you sign off the last.</p>
+        <div class="months">
+          <div class="m"><small>Month 1</small><b>The Message</b><span>What you're exceptional at and who you help. Messaging only, no design.</span></div>
+          <div class="m"><small>Month 2</small><b>The Look (Visual Identity)</b><span>Your identity, built on the message, in a brand identity presentation: concepts, style guide and mockups.</span></div>
+          <div class="m"><small>Month 3</small><b>Finish &amp; Hand Off</b><span>Loose ends tied up, your files handed over, your first one or two touch points started.</span></div>
+          <div class="m opt"><small>After the sprint</small><b>Optional</b><span>Part ways, or stay on as your brand guardian.</span></div>
+        </div>
+      </div>`;
+    if (i === 1) return `
+      <div class="step">
+        <span class="kick">Step 2 of 6</span>
+        <h2>When would you like to start?</h2>
+        <p class="lead">Pick a start week. We'll lay out the three months from there.</p>
+        <div class="chips" role="group" aria-label="Start date">
+          ${mondays.map((d,k) => `<button class="chip" data-act="start" data-k="${k}" aria-pressed="${st.start && +st.start === +d}">${fmt(d)}</button>`).join('')}
+        </div>
+        <span class="flag">Open question: real availability would come from the studio calendar. These are sample Mondays.</span>
+        <div class="rows">
+          <div class="r"><span>Month 1: The Message</span><span>${s ? fmt(s.m1) : '-'}</span></div>
+          <div class="r"><span>Month 2: The Look</span><span>${s ? fmt(s.m2) : '-'}</span></div>
+          <div class="r"><span>Month 3: Finish &amp; Hand Off</span><span>${s ? fmt(s.m3) : '-'}</span></div>
+          <div class="r"><span>Sprint ends</span><span>${s ? fmt(s.end) : '-'}</span></div>
+        </div>
+        <p class="note">We plan around replies within 3 to 5 business days. We work 9:00 AM to 5:00 PM, closed on Shabbos and Jewish holidays.</p>
+      </div>`;
+    if (i === 2) return `
+      <div class="step">
+        <span class="kick">Step 3 of 6</span>
+        <h2>Working with us assumes you believe:</h2>
+        <div class="believe">
+          ${BELIEFS.map((b,k) => `<label><input type="checkbox" id="believe-${k}" data-act="agree" data-k="${k}" ${st.agree[k] ? 'checked' : ''}><span>${b}</span></label>`).join('')}
+          <label class="more"><span>[More statements from Eli]</span></label>
+        </div>
+        ${allAgreed() ? `<p class="note">Thank you. That's the part that matters most.</p>` : `<span class="flag">Open question: what happens if a box stays unchecked? Here, the next step waits until every box is checked.</span>`}
+      </div>`;
+    if (i === 3) return `
+      <div class="step">
+        <span class="kick">Step 4 of 6</span>
+        <h2>The agreement, in plain words</h2>
+        <p class="lead">The 3-Month Brand Sprint is $24,000. Choose how you'd like to pay.</p>
+        <div class="plans" role="group" aria-label="Payment plan">
+          <button class="plan" data-act="plan" data-v="monthly" aria-pressed="${st.plan==='monthly'}"><b>3 monthly payments</b><span>$8,000 each</span></button>
+          <button class="plan" data-act="plan" data-v="split" aria-pressed="${st.plan==='split'}"><b>50% now, 50% at the end of month 3</b><span>$12,000 each</span></button>
+        </div>
+        <ul class="terms">
+          <li>The fee covers the full sprint, even if we finish early.</li>
+          <li>One named representative signs off each step in writing.</li>
+          <li>No design until the message is signed off.</li>
+          <li>Replies within 3 to 5 business days. Extra time or extras at $300/hour.</li>
+          <li>Final approved work is yours once the sprint is paid in full.</li>
+          <li>A late payment pauses the work. The schedule stays the same.</li>
+          <li>Payments are non-refundable.</li>
+          <li>After the sprint: $6,000 a month, or $5,000 a month for six months. 30 days' written notice either way.</li>
+        </ul>
+        ${st.signed ? `<p class="signed">Signed by ${esc(st.name)} on ${fmt(today)}.</p>` : `
+        <div class="sign">
+          <label for="sign-name" class="note" style="width:100%">Type your full name to sign</label>
+          <input id="sign-name" data-act="name" value="${esc(st.name)}" placeholder="Your full name" autocomplete="name">
+          <button class="pill dark" data-act="sign" ${st.name.trim().length > 2 ? '' : 'disabled'}>Sign agreement</button>
+        </div>`}
+        <span class="flag">Open question: which signing tool, and how it links to the invoice. Prototype only, nothing is signed.</span>
+      </div>`;
+    if (i === 4) return `
+      <div class="step">
+        <span class="kick">Step 5 of 6</span>
+        <h2>Your first invoice</h2>
+        <div class="invoice">
+          <div class="ih"><b>itseli</b><span class="note">Invoice 1 of ${st.plan==='monthly' ? 3 : 2}</span></div>
+          <div class="rows">
+            <div class="r"><span>Billed to</span><span>${st.name ? esc(st.name) : '[Your name]'}, [Your business]</span></div>
+            <div class="r"><span>3-Month Brand Sprint, ${st.plan==='monthly' ? 'payment 1 of 3' : '50% to start'}</span><span>${money(firstAmount())}</span></div>
+            <div class="r"><span>Due</span><span>${s ? fmt(s.m1) : 'Your start date'}</span></div>
+          </div>
+          <div class="tot"><span>Total due</span><span>${money(firstAmount())}</span></div>
+        </div>
+        <p class="note">Work starts when the first payment is in.</p>
+        <button class="pill dark" disabled style="align-self:flex-start">Pay invoice</button>
+        <span class="flag">Open question: which invoicing and payment tool. Prototype only, no payment is taken.</span>
+      </div>`;
+    if (i === 5) {
+      const rows = [];
+      if (s) {
+        rows.push(['big','First payment in, work starts', s.m1]);
+        rows.push(['','Month 1: The Message, messaging only', s.m1]);
+        rows.push(['','Sign-off: the message', s.m2]);
+        rows.push(['big','Month 2: The Look (Visual Identity)', s.m2]);
+        if (st.plan==='monthly') rows.push(['pay','Payment 2 of 3: $8,000', s.m2]);
+        rows.push(['','Brand identity presentation, then sign-off', s.m3]);
+        rows.push(['big','Month 3: Finish & Hand Off', s.m3]);
+        if (st.plan==='monthly') rows.push(['pay','Payment 3 of 3: $8,000', s.m3]);
+        rows.push(['','Files handed over, first touch points started', s.end]);
+        if (st.plan==='split') rows.push(['pay','Final 50%: $12,000', s.end]);
+        rows.push(['big','Sprint ends: part ways, or stay on', s.end]);
+      }
+      return `
+      <div class="step">
+        <span class="kick">Step 6 of 6</span>
+        <h2>Your step by step schedule</h2>
+        ${s ? `<ol class="sched">${rows.map(r => `<li class="${r[0]}"><span>${r[1]}</span><span>${fmt(r[2])}</span></li>`).join('')}</ol>
+        <p class="note">Dates move with sign-offs. Each step starts once you sign off the last.</p>`
+        : `<p class="lead">Pick a start week in step 2 and your schedule appears here.</p>`}
+        <span class="flag">Open question: where the schedule lives afterwards (a calendar invite, an email, a client page).</span>
+      </div>`;
+    }
+  }
+  function esc(t){ return String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+  /* ---------------- shared chrome ---------------- */
+  const topbar = (center = '') => `
+    <div class="top">
+      <span class="pill light brand">itseli</span>
+      ${center}
+      <div class="switch" role="group" aria-label="Prototype layout options">
+        <span class="lab">Options</span>
+        ${['A','B','C'].map(k => `<button data-act="shell" data-v="${k}" aria-pressed="${st.shell===k}">${k} ${{A:'Desk',B:'Cards',C:'Timeline'}[k]}</button>`).join('')}
+      </div>
+    </div>`;
+  const summaryRows = () => {
+    const s = sprint();
+    return `<div class="rows">
+      <div class="r"><span>Start</span><span>${s ? fmtShort(s.m1) : '-'}</span></div>
+      <div class="r"><span>Sprint ends</span><span>${s ? fmtShort(s.end) : '-'}</span></div>
+      <div class="r"><span>Beliefs</span><span>${st.agree.filter(Boolean).length} of ${BELIEFS.length}</span></div>
+      <div class="r"><span>Payment</span><span>${st.plan==='monthly' ? '3 x $8,000' : '2 x $12,000'}</span></div>
+      <div class="r"><span>Agreement</span><span>${st.signed ? 'Signed' : 'Not yet'}</span></div>
+      <div class="r"><span>First invoice</span><span>${money(firstAmount())}</span></div>
+    </div>`;
+  };
+  const nextLabel = () => st.step === 5 ? 'Done' : st.step === 3 && !st.signed ? 'Sign to continue' : 'Continue';
+
+  /* ---------------- shells ---------------- */
+  function shellA(){
+    return `${topbar()}
+      <div class="desk">
+        <nav class="card rail" aria-label="Onboarding steps">
+          <h3>Onboarding</h3>
+          ${STEPS.map((s,i) => `<button data-act="go" data-i="${i}" ${i===st.step?'aria-current="step"':''} ${reachable(i)?'':'disabled'}><span class="dot ${done(i)?'ok':''}">${done(i)?'✓':i+1}</span><span class="t">${s.name}</span></button>`).join('')}
+        </nav>
+        <section class="card main" aria-live="polite">
+          <div class="scroll">${stepHTML(st.step)}</div>
+          <div class="foot">
+            <button class="pill light" data-act="prev" ${st.step===0?'disabled':''}>Back</button>
+            <button class="pill dark" data-act="next" ${canLeave(st.step)&&st.step<5?'':'disabled'}>${nextLabel()}</button>
+          </div>
+        </section>
+        <aside class="card summary" aria-label="Your sprint">
+          <h3>Your sprint</h3>
+          ${summaryRows()}
+          <div class="help">Questions before you continue? The team is a message away.</div>
+        </aside>
+      </div>`;
+  }
+  function shellB(){
+    return `${topbar()}
+      <div class="cards">
+        <button class="round" data-act="prev" aria-label="Previous step" ${st.step===0?'disabled':''}>${icon('M15 6l-6 6 6 6')}</button>
+        <section class="card" aria-live="polite">
+          <div class="progress" aria-hidden="true">${STEPS.map((s,i)=>`<i class="${i<=st.step?'on':''}"></i>`).join('')}</div>
+          <div class="scroll">${stepHTML(st.step)}</div>
+        </section>
+        <button class="round" data-act="next" aria-label="Next step" ${canLeave(st.step)&&st.step<5?'':'disabled'}>${icon('M9 6l6 6-6 6')}</button>
+      </div>
+      <nav class="dock" aria-label="Onboarding steps">
+        ${STEPS.slice(0,3).map((s,i)=>`<button class="round ${i===st.step?'on':''}" data-act="go" data-i="${i}" aria-label="${s.name}" title="${s.name}" ${reachable(i)?'':'disabled'}>${icon(s.icon)}</button>`).join('')}
+        <button class="go" data-act="next" ${canLeave(st.step)&&st.step<5?'':'disabled'}>${nextLabel()}<i>${icon('M5 12h14M13 6l6 6-6 6')}</i></button>
+        ${STEPS.slice(3).map((s,j)=>{const i=j+3;return `<button class="round ${i===st.step?'on':''}" data-act="go" data-i="${i}" aria-label="${s.name}" title="${s.name}" ${reachable(i)?'':'disabled'}>${icon(s.icon)}</button>`}).join('')}
+      </nav>`;
+  }
+  function shellC(){
+    const s = sprint();
+    const hot = { 0:-1, 1:-1, 2:-1, 3:-1, 4:0, 5:-2 }[st.step];
+    const segs = [['Month 1','The Message',s&&s.m1],['Month 2','The Look',s&&s.m2],['Month 3','Finish & Hand Off',s&&s.m3],['After','Optional',s&&s.end]];
+    return `${topbar(`<nav class="steps" aria-label="Onboarding steps" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">${STEPS.map((x,i)=>`<button class="pill sm" data-act="go" data-i="${i}" ${i===st.step?'aria-current="step"':''} ${reachable(i)?'':'disabled'}>${done(i)?'✓ ':''}${x.name}</button>`).join('')}</nav>`)}
+      <div class="tl">
+        <div class="float">
+          <section class="card" aria-live="polite">
+            ${stepHTML(st.step)}
+            <div class="foot">
+              <button class="pill light" data-act="prev" ${st.step===0?'disabled':''}>Back</button>
+              <button class="pill dark" data-act="next" ${canLeave(st.step)&&st.step<5?'':'disabled'}>${nextLabel()}</button>
+            </div>
+          </section>
+          <aside class="card side" aria-label="Your sprint"><h3>Your sprint</h3>${summaryRows()}</aside>
+        </div>
+        <div class="track" aria-label="Your sprint timeline">
+          <div class="meta"><span>Your 3-Month Brand Sprint</span><span>${s ? fmtShort(s.m1)+' to '+fmtShort(s.end) : 'Pick a start date to see your dates'}</span></div>
+          <div class="bar">${segs.map((g,k)=>`<div class="seg ${k===3?'opt':''} ${(hot===-2||k===hot||(st.step===0&&k<3))?'hot':''}"><small>${g[0]}</small><b>${g[1]}</b><span>${g[2]?fmt(g[2]):'-'}</span></div>`).join('')}</div>
+        </div>
+      </div>`;
+  }
+
+  /* ---------------- render + events ---------------- */
+  const ui = document.getElementById('ui');
+  function render(focusSel){
+    ui.innerHTML = st.shell === 'A' ? shellA() : st.shell === 'B' ? shellB() : shellC();
+    if (focusSel) { const el = ui.querySelector(focusSel); if (el) { el.focus(); if (el.type === 'text') el.setSelectionRange(el.value.length, el.value.length); } }
+  }
+  ui.addEventListener('click', e => {
+    const b = e.target.closest('[data-act]'); if (!b || b.disabled) return;
+    const a = b.dataset.act;
+    if (a === 'shell') { st.shell = b.dataset.v; try { localStorage.setItem('itseli-onb-shell', st.shell); } catch(err) {} render(); }
+    else if (a === 'go') { st.step = +b.dataset.i; render(); }
+    else if (a === 'next') { if (canLeave(st.step) && st.step < 5) { st.step++; render(); } }
+    else if (a === 'prev') { if (st.step > 0) { st.step--; render(); } }
+    else if (a === 'start') { st.start = mondays[+b.dataset.k]; render(); }
+    else if (a === 'plan') { st.plan = b.dataset.v; render(); }
+    else if (a === 'sign') { if (st.name.trim().length > 2) { st.signed = true; render(); } }
+  });
+  ui.addEventListener('change', e => {
+    const t = e.target;
+    if (t.dataset.act === 'agree') { st.agree[+t.dataset.k] = t.checked; render('#believe-' + t.dataset.k); }
+  });
+  ui.addEventListener('input', e => {
+    const t = e.target;
+    if (t.dataset.act === 'name') { st.name = t.value; const btn = ui.querySelector('[data-act="sign"]'); if (btn) btn.disabled = st.name.trim().length <= 2; }
+  });
+  render();
+})();
+</script>

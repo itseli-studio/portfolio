@@ -131,6 +131,9 @@ No-results state. Search answers common questions straight from the FAQs.
 - `docs/concepts/04-story.html` (2026-11-11): "Story", the homepage following the doc's eight-step
   story path in order, every approved line used once, glass style kept, no chatbot feel, "Work with
   us" as the only button. Artifact: https://claude.ai/artifact/X4UhEjKBfFEcmg5xTGpKR1
+- `docs/concepts/05-onboarding.html` (2026-11-13): phase 1 client onboarding, three layout options
+  for the same six steps on one fixed screen (A Desk, B Cards, C Timeline). Open questions from the
+  doc are shown as flags inside the steps. Artifact: https://claude.ai/artifact/LSudDdqYdjg5Vpaecwzbhs
 - Same canvas, page "Round 4 · The questions" (2026-11-10): Fresh 3 developed. V1 split (questions
   left, image right), V2 image band with the answer on it, V3 a sheet of paper on the desk, a phone
   version, and the What we do page in the same question style. Each image changes with the open
@@ -209,3 +212,13 @@ No-results state. Search answers common questions straight from the FAQs.
 - 2026-11-11: The doc (newer than the Nov 10 chat) keeps the locked pitch with "tired of keeping
   your message straight" and shows exact prices ($24,000; $6,000 or $5,000 a month; payment terms).
   The Story prototype follows the doc on both. Confirm with Eli.
+- 2026-11-11 (doc, top rule "The layout"): not a scrolling landing page. One fixed full-viewport
+  screen like a product dashboard; views and panels open from buttons at the top, bottom and sides.
+  The story path is now 9 steps (new step 8: "Working with us assumes you believe", before Work with
+  us). No therapy or therapist language anywhere, including Eli's own lines. Ideal client: founders
+  who execute at a high level and are fully invested in their idea (qualifies the $3M+ line).
+- 2026-11-12/13 (doc + Eli): Phase 1 priority is client onboarding on the same platform and look:
+  1 present the process, 2 timelines, 3 check a box for each belief statement, 4 contract,
+  5 invoice, 6 step by step schedule. Open questions in the doc: contract and invoice tools and how
+  they connect; what happens if a box is unchecked; where onboarding starts; accounts or logins;
+  where timelines and the schedule come from.
