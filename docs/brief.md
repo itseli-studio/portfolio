@@ -134,6 +134,11 @@ No-results state. Search answers common questions straight from the FAQs.
 - `docs/concepts/05-onboarding.html` (2026-11-13): phase 1 client onboarding, three layout options
   for the same six steps on one fixed screen (A Desk, B Cards, C Timeline). Open questions from the
   doc are shown as flags inside the steps. Artifact: https://claude.ai/artifact/LSudDdqYdjg5Vpaecwzbhs
+- `docs/concepts/06-onboarding-styles.html` (2026-11-13): the same six onboarding steps in three
+  styles from Eli's references: 1 Characters (a pastel per step, single-ink line drawings),
+  2 Clean (white, bold flat blue drawings, black pills), 3 Glow (grainy warm gradient, frosted answer
+  pills that reply when chosen). Drawings are simple originals, placeholders for real illustration.
+  Artifact: https://claude.ai/artifact/FVEZCNAD6fXVt6y9yhpEqP
 - Same canvas, page "Round 4 · The questions" (2026-11-10): Fresh 3 developed. V1 split (questions
   left, image right), V2 image band with the answer on it, V3 a sheet of paper on the desk, a phone
   version, and the What we do page in the same question style. Each image changes with the open
@@ -222,3 +227,6 @@ No-results state. Search answers common questions straight from the FAQs.
   5 invoice, 6 step by step schedule. Open questions in the doc: contract and invoice tools and how
   they connect; what happens if a box is unchecked; where onboarding starts; accounts or logins;
   where timelines and the schedule come from.
+- 2026-11-13: Eli shared three onboarding style references (not committed: third-party work, public
+  repo) to explore: pastel step screens with single-color character line art; clean white screens
+  with bold flat blue illustrations and black pills; a grainy warm gradient with frosted answer pills.

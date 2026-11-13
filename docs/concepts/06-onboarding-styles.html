@@ -1,0 +1,333 @@
+<title>itseli Onboarding Styles</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Hanken+Grotesk:wght@300;400;500&display=swap">
+<style>
+/* Layout: one fixed screen. The onboarding runs as phone-sized screens, mobile first. On a phone the current
+   screen fills the view; on a wider screen the previous and next steps sit beside it, like a set of app shots.
+   Three styles share the same six steps and copy so only the look changes:
+   1 Characters (a pastel color per step, single-color line drawings), 2 Clean (white, bold flat blue drawings,
+   black pills), 3 Glow (grainy warm gradient, frosted answer pills that reply when chosen). */
+:root{ --f1:"Albert Sans",ui-sans-serif,system-ui,sans-serif; --f2:"Plus Jakarta Sans",ui-sans-serif,system-ui,sans-serif; --f3:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif; color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;overflow:hidden;-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.45}
+button,input{font:inherit;color:inherit}
+h2,p,ul,ol{margin:0}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:12px}
+
+/* the stage behind the screens (presentation backdrop per style) */
+.stage{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;gap:14px;overflow:hidden;
+  padding:max(14px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(14px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));transition:background-color .4s ease}
+.s1 .stage{background:#121212}
+.s2 .stage{background:#EFEFEF}
+.s3 .stage{background:#D98C88}
+.switch{position:relative;z-index:5;display:flex;gap:4px;padding:4px;border-radius:999px;background:rgb(255 255 255 / 85%);box-shadow:0 8px 24px -14px rgb(0 0 0 / 40%);font-family:var(--f3)}
+.switch button{border:0;background:transparent;height:36px;padding:0 14px;border-radius:999px;font-size:13px;cursor:pointer;color:#222222}
+.switch button[aria-pressed="true"]{background:#1C1C1C;color:#FFFFFF}
+.row{position:relative;flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,28px)}
+.peek{flex:none;width:300px;height:min(600px,80%);border-radius:30px;overflow:hidden;opacity:.55;cursor:pointer;transition:opacity .3s ease;border:0;padding:0;background:transparent;text-align:left}
+.peek:hover{opacity:.8}
+.peek .screen{width:100%;height:100%;pointer-events:none}
+.peek.empty{visibility:hidden}
+.peek.locked{cursor:not-allowed;opacity:.35}
+.main{flex:none;width:min(400px,100%);height:min(800px,100%);border-radius:36px;overflow:hidden;box-shadow:0 40px 80px -40px rgb(0 0 0 / 55%)}
+@media (max-width:1060px){.peek{display:none}}
+@media (max-width:520px){.main{width:100%;height:100%;border-radius:28px}.switch button{padding:0 10px}}
+
+/* ---------- a screen ---------- */
+.screen{position:relative;height:100%;display:flex;flex-direction:column;padding:22px 22px 20px;overflow:hidden}
+.screen .head{display:flex;justify-content:space-between;align-items:center;min-height:32px}
+.mark{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600;letter-spacing:-.02em}
+.help{border:0;background:transparent;font-size:14px;cursor:pointer;padding:6px 0;text-decoration:underline;text-underline-offset:3px}
+.kick{font-size:13px;margin-top:14px}
+.title{font-size:26px;line-height:1.12;letter-spacing:-.02em;margin-top:4px;text-wrap:balance}
+.art{flex:1;min-height:110px;display:flex;align-items:center;justify-content:center;padding:8px 0}
+.art svg{width:100%;height:100%;max-height:300px}
+.art.small{flex:0 0 auto;height:118px;min-height:0}
+.art.small svg{max-height:118px}
+.body{display:flex;flex-direction:column;gap:8px;min-height:0;overflow:auto;padding:2px 2px 4px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:14px;flex-wrap:wrap}
+.dots{display:flex;gap:6px}
+.dots i{width:7px;height:7px;border-radius:50%;opacity:.35;background:currentColor}
+.dots i.on{opacity:1}
+.back{border:0;background:transparent;font-size:14px;cursor:pointer;padding:8px 0}
+.back[disabled]{visibility:hidden}
+.primary{border:0;cursor:pointer;height:50px;padding:0 24px;border-radius:999px;font-size:16px;white-space:nowrap}
+.primary[disabled]{opacity:.4;cursor:not-allowed}
+.small{font-size:13px;opacity:.75}
+.rows .r{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid currentColor;border-top-color:rgb(0 0 0 / 12%);font-size:15px}
+.rows .r:first-child{border-top:0}
+.rows .r span:last-child{opacity:.7;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.opt{width:100%;text-align:left;cursor:pointer;border-radius:18px;padding:13px 16px;font-size:15px;display:flex;align-items:center;gap:12px;transition:background-color .25s ease,transform .25s ease}
+.opt .box{width:22px;height:22px;border-radius:7px;flex:none;display:grid;place-items:center}
+.opt .txt{display:flex;flex-direction:column;gap:2px}
+.opt .reply{font-size:13px;opacity:.8}
+.sign{display:flex;flex-direction:column;gap:8px}
+.sign input{height:48px;border-radius:14px;padding:0 14px;font-size:16px}
+.invoice{border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.invoice .tot{display:flex;justify-content:space-between;align-items:baseline;padding-top:8px}
+.invoice .tot b{font-size:26px;font-weight:500;font-variant-numeric:tabular-nums}
+details summary{cursor:pointer;font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:4px 0}
+details ul{padding-left:18px;font-size:13px;display:flex;flex-direction:column;gap:4px;margin-top:6px;opacity:.85}
+.open{font-size:12px;border-radius:12px;padding:7px 10px;line-height:1.35}
+
+/* ---------- Style 1: Characters ---------- */
+.s1 .screen{font-family:var(--f1);background:var(--bg);color:#151515}
+.s1 .mark{border:2px solid #151515}
+.s1 .title{font-weight:500}
+.s1 .kick{font-weight:500}
+.s1 .primary{background:var(--ink);color:#FFFFFF}
+.s1 .opt{border:1.5px solid rgb(21 21 21 / 18%);background:rgb(255 255 255 / 40%)}
+.s1 .opt[aria-pressed="true"]{background:#FFFFFF;border-color:var(--ink)}
+.s1 .opt .box{border:1.5px solid var(--ink)}
+.s1 .opt[aria-pressed="true"] .box{background:var(--ink)}
+.s1 .sign input{border:1.5px solid rgb(21 21 21 / 20%);background:rgb(255 255 255 / 70%)}
+.s1 .invoice{background:rgb(255 255 255 / 60%)}
+.s1 .open{background:rgb(255 255 255 / 45%)}
+
+/* ---------- Style 2: Clean ---------- */
+.s2 .screen{font-family:var(--f2);background:#FFFFFF;color:#111111}
+.s2 .mark{background:#111111;color:#FFFFFF}
+.s2 .title{font-weight:800;font-size:27px;letter-spacing:-.03em}
+.s2 .kick{color:#8A8A8A}
+.s2 .primary{background:#111111;color:#FFFFFF;font-weight:700}
+.s2 .back{border:1.5px solid #E2E2E2;border-radius:999px;height:50px;padding:0 20px;font-weight:600}
+.s2 .opt{border:1.5px solid #E7E7E7;background:#FAFAFA}
+.s2 .opt[aria-pressed="true"]{border-color:#111111;background:#FFFFFF}
+.s2 .opt .box{border:2px solid #111111;border-radius:50%}
+.s2 .opt[aria-pressed="true"] .box{background:#2F5BFF;border-color:#2F5BFF}
+.s2 .sign input{border:0;background:#F4F4F4}
+.s2 .invoice{background:#F6F6F6}
+.s2 .open{background:#F4F4F4;color:#5A5A5A}
+.s2 .dots i.on{background:#111111}
+
+/* ---------- Style 3: Glow ---------- */
+.s3 .screen{font-family:var(--f3);color:#231A1A;background:
+  radial-gradient(60% 50% at 20% 25%,rgb(236 110 230 / 90%),transparent 70%),
+  radial-gradient(55% 45% at 85% 70%,rgb(250 150 60 / 95%),transparent 70%),
+  radial-gradient(60% 60% at 50% 100%,rgb(248 224 200 / 95%),transparent 70%),
+  #F0883E}
+.s3 .screen::before{content:"";position:absolute;inset:0;opacity:.35;mix-blend-mode:overlay;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.s3 .screen>*{position:relative}
+.s3 .mark{background:rgb(255 255 255 / 40%);backdrop-filter:blur(10px)}
+.s3 .title{font-weight:300;font-size:31px;letter-spacing:-.035em;text-align:center;margin-top:18px}
+.s3 .kick{text-align:center;opacity:.75}
+.s3 .art{display:none}
+.s3 .body{margin-top:18px;flex:1;justify-content:center}
+.s3 .primary{background:#1F2422;color:#FFFFFF;width:100%;height:56px}
+.s3 .foot{flex-direction:column-reverse;align-items:stretch}
+.s3 .foot .dots{justify-content:center}
+.s3 .foot>div{display:flex;justify-content:space-between;align-items:center}
+.s3 .opt{justify-content:center;text-align:center;border:1px solid rgb(255 255 255 / 55%);background:rgb(255 255 255 / 32%);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:22px}
+.s3 .opt .box{display:none}
+.s3 .opt .txt{align-items:center}
+.s3 .opt[aria-pressed="true"]{background:#F8EADB;border-color:#F8EADB;transform:scale(1.02)}
+.s3 .rows{background:rgb(255 255 255 / 30%);border-radius:22px;padding:6px 16px;backdrop-filter:blur(14px)}
+.s3 .sign input{border:1px solid rgb(255 255 255 / 60%);background:rgb(255 255 255 / 45%)}
+.s3 .invoice{background:rgb(255 255 255 / 45%);backdrop-filter:blur(14px)}
+.s3 .open{background:rgb(255 255 255 / 30%);text-align:center}
+.s3 .help{text-decoration:none;font-size:12px;letter-spacing:.06em;font-weight:500}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="s1" id="root">
+  <div class="stage">
+    <div class="switch" role="group" aria-label="Design style">
+      <button data-act="style" data-v="s1" aria-pressed="true">1 Characters</button>
+      <button data-act="style" data-v="s2" aria-pressed="false">2 Clean</button>
+      <button data-act="style" data-v="s3" aria-pressed="false">3 Glow</button>
+    </div>
+    <div class="row" id="row"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  /* ---------- content (from the Studio Website Brief) ---------- */
+  const STEPS = [
+    { kick:'Step 1', title:"Here's how every engagement runs" },
+    { kick:'Step 2', title:'When would you like to start?' },
+    { kick:'Step 3', title:'Working with us assumes you believe:' },
+    { kick:'Step 4', title:'The agreement, in plain words' },
+    { kick:'Step 5', title:'Your first invoice' },
+    { kick:'Step 6', title:'Your step by step schedule' }
+  ];
+  const BELIEFS = ["As the founder, you can't build two successful brands at once.", "The right eyeballs over the number of eyeballs."];
+  /* Style 1: a pastel per step with a deeper ink of the same hue */
+  const PAL = [
+    { bg:'#CDBEFF', ink:'#4B3BE0' }, { bg:'#FFCBAE', ink:'#E8521A' }, { bg:'#C8B97E', ink:'#2D6A3C' },
+    { bg:'#BFE2D2', ink:'#17674F' }, { bg:'#C3D7F5', ink:'#2552B8' }, { bg:'#F4E1A3', ink:'#9A5410' }
+  ];
+
+  /* ---------- state ---------- */
+  const st = { style:'s1', step:0, start:null, plan:'monthly', agree:BELIEFS.map(()=>false), name:'', signed:false };
+  try { const s = localStorage.getItem('itseli-onb-style'); if (s) st.style = s; } catch(e) {}
+
+  /* ---------- dates ---------- */
+  const today = new Date(); today.setHours(0,0,0,0);
+  const mondays = (() => { const d = new Date(today); d.setDate(d.getDate()+14); while (d.getDay() !== 1) d.setDate(d.getDate()+1); return [0,7,14,21].map(n => { const x = new Date(d); x.setDate(x.getDate()+n); return x; }); })();
+  const addM = (d,n) => { const x = new Date(d); x.setMonth(x.getMonth()+n); return x; };
+  const fmt = d => d.toLocaleDateString('en-US',{ weekday:'short', month:'short', day:'numeric' });
+  const money = n => '$' + n.toLocaleString('en-US');
+  const sprint = () => st.start ? { m1:st.start, m2:addM(st.start,1), m3:addM(st.start,2), end:addM(st.start,3) } : null;
+  const first = () => st.plan === 'monthly' ? 8000 : 12000;
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  /* ---------- gates ---------- */
+  const canLeave = i => i === 1 ? !!st.start : i === 2 ? st.agree.every(Boolean) : i === 3 ? st.signed : true;
+  const label = i => i === 5 ? 'Done' : i === 3 && !st.signed ? 'Sign first' : 'Next';
+
+  /* ---------- drawings (original, simple; placeholders for commissioned illustration) ----------
+     One geometry per step. Style 1 draws it as a single-ink line drawing; Style 2 as bold flat blue with black outlines. */
+  function art(i, s){
+    const L = s === 's1';
+    const ink = L ? PAL[i].ink : '#111111';
+    const fill = L ? 'rgb(255 255 255 / 0)' : '#2F5BFF';
+    const soft = L ? PAL[i].ink : '#2F5BFF';
+    const acc1 = L ? PAL[i].ink : '#3DDC97';
+    const acc2 = L ? PAL[i].ink : '#F2A9A0';
+    const w = L ? 3 : 3.2;
+    const g = (inner) => `<svg viewBox="0 0 200 200" fill="none" stroke="${ink}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+    const sparkle = (x,y,r) => `<path d="M${x} ${y-r}L${x+r*.28} ${y-r*.28}L${x+r} ${y}L${x+r*.28} ${y+r*.28}L${x} ${y+r}L${x-r*.28} ${y+r*.28}L${x-r} ${y}L${x-r*.28} ${y-r*.28}Z" fill="${L?'none':'#111111'}"/>`;
+    if (i === 0) return g(`
+      <rect x="28" y="44" width="62" height="62" rx="6" transform="rotate(-8 59 75)" fill="${fill}"/>
+      <path d="M40 64h34M40 76h26" stroke="${L?ink:'#FFFFFF'}" transform="rotate(-8 59 75)"/>
+      <rect x="110" y="62" width="62" height="62" rx="6" transform="rotate(7 141 93)" fill="${L?fill:acc1}"/>
+      <path d="M122 84h34M122 96h22" transform="rotate(7 141 93)"/>
+      <rect x="62" y="122" width="62" height="56" rx="6" transform="rotate(-3 93 150)" fill="${L?fill:acc2}"/>
+      <path d="M74 142h34M74 154h20" transform="rotate(-3 93 150)"/>
+      <path d="M92 52c18-14 34-10 44 2" /><path d="M132 46l5 9-10 1"/>
+      ${sparkle(170,40,9)}${sparkle(30,150,7)}`);
+    if (i === 1) return g(`
+      <rect x="34" y="46" width="132" height="122" rx="14" fill="${L?fill:'#FFFFFF'}"/>
+      <path d="M34 78h132" /><rect x="34" y="46" width="132" height="32" rx="14" fill="${soft}" stroke="${ink}"/>
+      <path d="M66 36v20M134 36v20"/>
+      ${[0,1,2,3].map(r=>[0,1,2,3,4].map(c=>`<circle cx="${56+c*22}" cy="${98+r*18}" r="2.6" fill="${ink}" stroke="none"/>`).join('')).join('')}
+      <ellipse cx="100" cy="116" rx="15" ry="12" stroke="${L?ink:'#3DDC97'}" stroke-width="${w+0.6}"/>
+      ${sparkle(174,40,9)}`);
+    if (i === 2) return g(`
+      <rect x="46" y="46" width="108" height="108" rx="26" fill="${fill}"/>
+      <path d="M74 102l18 18 36-40" stroke="${L?ink:'#FFFFFF'}" stroke-width="${w+5}"/>
+      <path d="M150 156c6-10 18-10 22 0c4 10-10 18-22 26c-12-8-26-16-22-26c4-10 16-10 22 0z" fill="${L?fill:acc2}" transform="translate(-10 -6) scale(.9)"/>
+      ${sparkle(36,44,10)}${sparkle(168,48,7)}`);
+    if (i === 3) return g(`
+      <rect x="44" y="30" width="96" height="134" rx="8" transform="rotate(-6 92 97)" fill="${L?fill:'#FFFFFF'}"/>
+      <path d="M62 56h56M62 70h56M62 84h40M62 98h50" transform="rotate(-6 92 97)"/>
+      <path d="M64 136c8-14 14 6 22-6s10 8 18-2 8 6 14 0" stroke="${L?ink:'#2F5BFF'}" stroke-width="${w+0.6}" transform="rotate(-6 92 97)"/>
+      <path d="M128 168l40-62 12 8-40 62-16 6z" fill="${soft}"/>
+      <path d="M160 118l12 8"/>
+      ${sparkle(170,40,9)}`);
+    if (i === 4) return g(`
+      <path d="M52 30h96v140l-12-8-12 8-12-8-12 8-12-8-12 8-12-8-12 8z" fill="${L?fill:'#FFFFFF'}"/>
+      <circle cx="100" cy="72" r="22" fill="${soft}"/>
+      <path d="M106 63c-3-3-12-3-12 3s12 4 12 10-9 6-12 3M100 58v4M100 82v4" stroke="${L?ink:'#FFFFFF'}"/>
+      <path d="M70 112h60M70 126h44M70 140h52"/>
+      ${sparkle(170,46,9)}${sparkle(30,120,7)}`);
+    return g(`
+      <path d="M30 168c30-4 26-40 60-44s40-30 70-40" stroke-dasharray="2 10" stroke-width="${w+1}"/>
+      <path d="M30 168v-34l22 8-22 8" fill="${L?fill:acc1}"/>
+      <path d="M90 124v-34l22 8-22 8" fill="${L?fill:acc2}"/>
+      <path d="M160 84v-34l22 8-22 8" fill="${soft}"/>
+      <circle cx="60" cy="58" r="26" fill="${L?fill:'#FFFFFF'}"/><path d="M60 44v15l10 7"/>
+      ${sparkle(176,150,9)}`);
+  }
+
+  /* ---------- step bodies (same copy for every style) ---------- */
+  function body(i){
+    const s = sprint();
+    if (i === 0) return `
+      <div class="rows">
+        <div class="r"><span>Month 1: The Message</span><span>Messaging only</span></div>
+        <div class="r"><span>Month 2: The Look</span><span>Visual identity</span></div>
+        <div class="r"><span>Month 3: Finish &amp; Hand Off</span><span>Files and first touch points</span></div>
+        <div class="r"><span>After the sprint</span><span>Optional</span></div>
+      </div>
+      <p class="small">Each step starts once you sign off the last.</p>`;
+    if (i === 1) return mondays.map((d,k) => {
+      const on = st.start && +st.start === +d;
+      return `<button class="opt" data-act="start" data-k="${k}" aria-pressed="${!!on}"><span class="box" aria-hidden="true"></span><span class="txt"><span>${fmt(d)}</span>${on ? `<span class="reply">Good. The sprint runs to ${fmt(addM(d,3))}.</span>` : ''}</span></button>`;
+    }).join('') + `<p class="open">Open question: these are sample Mondays. Real dates would come from the studio calendar.</p>`;
+    if (i === 2) return BELIEFS.map((b,k) => `<button class="opt" data-act="agree" data-k="${k}" aria-pressed="${st.agree[k]}"><span class="box" aria-hidden="true">${st.agree[k] ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>' : ''}</span><span class="txt"><span>${b}</span>${st.agree[k] ? '<span class="reply">Agreed.</span>' : ''}</span></button>`).join('')
+      + `<p class="open">[More statements from Eli]. Open question: what happens if a box stays unchecked. Here, Next waits.</p>`;
+    if (i === 3) return `
+      <button class="opt" data-act="plan" data-v="monthly" aria-pressed="${st.plan==='monthly'}"><span class="box" aria-hidden="true"></span><span class="txt"><span>3 monthly payments of $8,000</span></span></button>
+      <button class="opt" data-act="plan" data-v="split" aria-pressed="${st.plan==='split'}"><span class="box" aria-hidden="true"></span><span class="txt"><span>50% now, 50% at the end of month 3</span></span></button>
+      <details><summary>Read the terms</summary><ul>
+        <li>The 3-Month Brand Sprint is $24,000. The fee covers the full sprint, even if we finish early.</li>
+        <li>One named representative signs off each step in writing. No design until the message is signed off.</li>
+        <li>Replies within 3 to 5 business days. Extra time or extras at $300/hour.</li>
+        <li>Final approved work is yours once paid in full. Payments are non-refundable.</li>
+        <li>After the sprint: $6,000 a month, or $5,000 a month for six months. 30 days' written notice.</li>
+      </ul></details>
+      ${st.signed ? `<p class="small">Signed by ${esc(st.name)} on ${fmt(today)}.</p>` : `
+      <div class="sign"><label class="small" for="sign-name">Type your full name to sign</label>
+        <input id="sign-name" data-act="name" value="${esc(st.name)}" placeholder="Your full name" autocomplete="name">
+        <button class="primary" data-act="sign" style="height:44px" ${st.name.trim().length>2?'':'disabled'}>Sign agreement</button></div>`}
+      <p class="open">Prototype only, nothing is signed. Open question: which signing tool.</p>`;
+    if (i === 4) return `
+      <div class="invoice">
+        <div class="rows">
+          <div class="r"><span>3-Month Brand Sprint, ${st.plan==='monthly' ? 'payment 1 of 3' : '50% to start'}</span><span>${money(first())}</span></div>
+          <div class="r"><span>Due</span><span>${s ? fmt(s.m1) : 'Your start date'}</span></div>
+        </div>
+        <div class="tot"><span>Total due</span><b>${money(first())}</b></div>
+      </div>
+      <p class="small">Work starts when the first payment is in.</p>
+      <p class="open">Prototype only, no payment is taken. Open question: which invoicing tool.</p>`;
+    if (!s) return `<p class="small">Pick a start week in step 2 and your schedule appears here.</p>`;
+    const rows = [['Work starts', s.m1], ['Month 1: The Message', s.m1], ['Month 2: The Look', s.m2], ...(st.plan==='monthly' ? [['Payment 2 of 3', s.m2]] : []), ['Month 3: Finish & Hand Off', s.m3], ...(st.plan==='monthly' ? [['Payment 3 of 3', s.m3]] : []), ['Files handed over', s.end], ...(st.plan==='split' ? [['Final 50%', s.end]] : []), ['Part ways, or stay on', s.end]];
+    return `<div class="rows">${rows.map(r => `<div class="r"><span>${r[0]}</span><span>${fmt(r[1])}</span></div>`).join('')}</div><p class="small">Dates move with sign-offs.</p>`;
+  }
+
+  /* ---------- one screen ---------- */
+  function screen(i, preview){
+    const heavy = i !== 0;
+    const pal = PAL[i];
+    return `<div class="screen" style="--bg:${pal.bg};--ink:${pal.ink}" ${preview ? 'inert' : ''}>
+      <div class="head"><span class="mark" aria-hidden="true">it</span>${preview ? `<span class="help">${st.style==='s3' ? 'QUESTIONS?' : 'Questions?'}</span>` : `<button class="help">${st.style==='s3' ? 'QUESTIONS?' : 'Questions?'}</button>`}</div>
+      <span class="kick">${STEPS[i].kick}${st.style==='s2' ? ' of 6' : ''}</span>
+      <h2 class="title">${STEPS[i].title}</h2>
+      <div class="art ${heavy && !preview ? 'small' : ''}">${art(i, st.style)}</div>
+      ${preview ? '' : `<div class="body">${body(i)}</div>`}
+      <div class="foot">
+        <div class="dots" aria-hidden="true">${STEPS.map((x,k)=>`<i class="${k===i?'on':''}"></i>`).join('')}</div>
+        ${preview ? '' : `<div style="display:flex;gap:12px;align-items:center"><button class="back" data-act="prev" ${i===0?'disabled':''}>Back</button><button class="primary" data-act="next" ${canLeave(i)&&i<5?'':'disabled'}>${label(i)}</button></div>`}
+      </div>
+    </div>`;
+  }
+
+  /* ---------- render ---------- */
+  const root = document.getElementById('root'), row = document.getElementById('row');
+  function render(focus){
+    root.className = st.style;
+    document.querySelectorAll('[data-act="style"]').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === st.style));
+    const p = st.step - 1, n = st.step + 1;
+    row.innerHTML =
+      `<div class="peek ${p<0?'empty':''}" data-act="go" data-i="${p}" aria-hidden="true">${p>=0?screen(p,true):''}</div>` +
+      `<section class="main" aria-live="polite">${screen(st.step,false)}</section>` +
+      `<div class="peek ${n>5?'empty':''} ${n<=5&&!canLeave(st.step)?'locked':''}" data-act="go" data-i="${n}" aria-hidden="true">${n<=5?screen(n,true):''}</div>`;
+    if (focus) { const el = row.querySelector(focus); if (el) { el.focus(); if (el.type === 'text') el.setSelectionRange(el.value.length, el.value.length); } }
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-act]'); if (!b || b.disabled) return;
+    const a = b.dataset.act;
+    if (a === 'style') { st.style = b.dataset.v; try { localStorage.setItem('itseli-onb-style', st.style); } catch(err) {} render(); }
+    else if (a === 'go') { const i = +b.dataset.i; if (i >= 0 && i <= 5 && (i < st.step || canLeave(st.step))) { st.step = i; render(); } }
+    else if (a === 'next') { if (canLeave(st.step) && st.step < 5) { st.step++; render(); } }
+    else if (a === 'prev') { if (st.step > 0) { st.step--; render(); } }
+    else if (a === 'start') { st.start = mondays[+b.dataset.k]; render(); }
+    else if (a === 'agree') { const k = +b.dataset.k; st.agree[k] = !st.agree[k]; render(`[data-act="agree"][data-k="${k}"]`); }
+    else if (a === 'plan') { st.plan = b.dataset.v; render(); }
+    else if (a === 'sign') { if (st.name.trim().length > 2) { st.signed = true; render(); } }
+  });
+  document.addEventListener('input', e => {
+    if (e.target.dataset.act === 'name') { st.name = e.target.value; const s = row.querySelector('[data-act="sign"]'); if (s) s.disabled = st.name.trim().length <= 2; }
+  });
+  render();
+})();
+</script>
